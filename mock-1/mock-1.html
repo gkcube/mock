@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0' name='viewport'/>
+  <style type="text/css">.post-title {display:none;}</style>
+<title>Mock 1</title>
+<script>
+function delayloading() {
+var ld = document.getElementsByTagName("loading");
+setTimeout(function() {ld[0].innerHTML = "NETWORK SLOW";}, 7000);
+setTimeout(function() {ld[0].innerHTML = "RETRYING";}, 8000);
+setTimeout(function() {ld[0].innerHTML = "LOADING";if($('#popup2').is(':visible')){location.reload();}}, 10000); }
+delayloading(); 
+</script>
+<script src='https://cdn.jsdelivr.net/gh/gkcube/js@1/jquery.min.js'></script>
+
+<style>
+
+body {max-width: 700px;user-select: none;
+background-color: #ffffff;
+margin:0px auto 0px auto;
+color:white;}
+button {outline: none;user-select: none;hover:none;border:none;padding:none;box-shadow:none;background:none;color:white;font-family:bengali;}
+
+.lockb {pointer-events:none}
+
+.swiper-wrapper {margin-bottom:100px;}
+
+@font-face {font-display:swap;font-family: Zen Dots; src: url(https://cdn.jsdelivr.net/gh/gkcube/fonts@1/ZenDots.woff2) format('woff2');}
+@font-face {font-family: bengali; src: url(https://cdn.jsdelivr.net/gh/gkcube/fonts@1/Solaiman.woff2) format('woff2');}
+@font-face {font-family: Roboto; src: url(https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmSU5fBBc4.woff2) format('woff2');)}
+@font-face {font-family: Quicksand; src: url(https://cdn.jsdelivr.net/gh/gkcube/fonts@1/Quicksand.woff2) format('woff2');}
+
+@font-face {font-display:block;font-family: 'Material Icons';font-style: normal; font-weight: 400; src: url(https://cdn.jsdelivr.net/gh/gkcube/fonts@1/MaterialIcons.woff2) format('woff2');}
+ben {font-family:bengali;line-height:1.1;font-weight:500;}
+.opt ben {line-height:1.4;}
+eng {font-family: Quicksand;}
+bengali {font-family:SolaimanLipi;}
+
+.popup2 {
+background-color: #ffffff;
+width:100%;height:100vh;top:0;left:0;position:fixed; z-index:5;text-align:center;color:black;font-family:Quicksand; }
+
+.loadshadow {box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.50);padding-top:25px;width:120px;height:95px;margin: 0px auto 0px auto;border-radius:10px;margin-top:40vh;}
+
+.loader {margin-left:auto;margin-right:auto; border: 2px solid transparent;border-radius: 100%;border-left: 2px solid #3498db;border-right: 2px solid #a8044b;width: 30px;height: 30px; animation: spin 0.8s linear infinite;z-index:4;}
+  @keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg); }}
+
+brtag {margin-top:15px; display:inline-block;width:100%;}
+
+.m-i {font-family: 'Material Icons';font-weight: normal;font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; font-feature-settings: 'liga'; text-rendering: optimizeLegibility;
+vertical-align:middle;}
+
+#msticky { position: fixed; margin-bottom:300px; top: 0px; left: 0px; z-index:5; width:100%;}
+
+.msubhead {background-image: linear-gradient(to right, #3280e7, #2c77db, #256dcf, #1d64c3, #155bb7); color: white; text-align:left; solid; width:100%;height:54px;border-bottom-right-radius:25px;border-bottom-left-radius:25px;box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);padding-top:2px;}
+.msubhead img {float:left;margin:6px 0px 0px 6px;}
+
+.msubhead abc {background-color:transparent; font-size:17px; color:white; border:0px solid #C8C8C8; margin-top:10px; font-weight: normal;display:inline-block;padding:3px 7px 1px 7px;border-top-left-radius:20px;border-bottom-right-radius:20px;}
+
+toolimg {float:left;}
+
+.tooltitle {height:51.5px; line-height:1.1;display:none;}
+
+tool1{font-size:15px;background-color:#c85f5a; border-radius:20px;padding: 2px 6px 2px 5px; float:left;border-bottom-left-radius:0px;border-top-left-radius:15px;}
+
+tool2 {font-size:15px;background-color:#2E4053;border-radius:20px;padding: 2px 6px 2px 5px; float:left; border-top-left-radius:0px;border-bottom-left-radius:15px;}
+
+#mclosebtn {background-color:transparent;border:none; border-radius:500px; width:40px;height:45px; float:left; margin:3px 0px 0px 8px;text-align:center;color:#fff;transition-duration: 0.2s;}
+#mclosebtn:active {color:black;}
+#mclosebtnr {background-color:transparent;border:none; border-radius:500px; width:40px;height:45px;float:right; margin:3px 8px 0px 0px; color:#fff;transition-duration: 0.2s;}
+
+#mclosebtnr:active {color:black;}
+
+quizbtn {background-image: linear-gradient(to left, #406599, #3f5b94, #3f518d, #414786, #443c7e);position:fixed; bottom:55px;width:84%;left:8%;z-index:3; border-top-right-radius:25px;border-top-left-radius:25px;}
+
+.dashboard {font-family:quicksand;background-color:#2f2956;border-radius: 5px;border-top-left-radius: 22.5px;  width:calc(50% - 7.5px);float:left;height:45px;margin: 5px 0px 5px 5px; font-size: 15px;}
+
+.resetb {background-color:#2f2956;border-width:0px; color: #fff; font-size: 15px; width:calc(50% - 7.5px);border-radius:5px;border-top-right-radius:22.5px;font-family:quicksand;float:right;height:45px;margin:5px 5px 5px 0px;padding-bottom:3px;transition-duration: 0.2s;}
+
+.resetb:active {background-color:black;}
+
+.dashboard:active {background-color:black;}
+
+.touch-option {z-index: 1;min-height:30px;height:30px;background: linear-gradient(to left, #c85f5a, #A74F4B);color:white;border-radius:20px;margin:-15px 0px 0px 0px;width:80%;box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.50);font-family:quicksand;font-size: 15px;float:left;position:absolute;left:10%;}
+
+next-previous-buttons {background-image: linear-gradient(to right, #406599, #3f5b94, #3f518d, #414786, #443c7e);position:fixed; bottom:0;width:100%;left:0;z-index:3;border-top-right-radius:25px;border-top-left-radius:25px;}
+ 
+.next-previous {background-color:#2f2956;width:calc(28% - 5px); border: 0px solid #7A1313;border-left-width:0px; color: white;font-weight: 300; font-size: 10px; margin: 5px 0px 5px 5px; max-height:45px;height:45px; text-align: center; border-radius:5px;border-top-left-radius:22.5px; font-family:quicksand;float:left;transition-duration: 0.2s;}
+
+.next-previous:active{background-color:#000000;}
+.next-right {margin: 5px 5px 5px 0px;float:right;border-radius:5px;border-top-right-radius:22.5px;}
+
+.next-previous .m-i {font-size:40px;margin-top:0px;}
+
+.goshowleft {background-color:#423a78;text-align:center; border: 0px solid #7A1313;border-radius:5px; color: white; font-weight: normal; font-size: 14px; padding-top:7px;padding-bottom:7px; width: calc(44% - 10px);font-family:quicksand;z-index: 1000;float:left;height:45px;margin:5px 0px 5px 5px;transition-duration: 0.2s;}
+
+.details {background-color:#423a78;text-align:center; border: 0px solid #7A1313;border-radius:5px; color: white; font-weight: normal; font-size: 14px;  width: calc(50% - 20px);font-family:quicksand;z-index: 1000;height:60px;margin:0px 5px 5px 5px;box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5); }
+
+.confirm {background-color:#423a78;height:50px;margin:0px 5px 5px 5px;box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5); }
+ 
+#belowpopup {display:none; position:fixed; width:100%;top:0;left:0; height:100vh; background-color:rgba(0, 0, 0, 0.5);z-index:5;}
+
+#belowend {display:none; position:fixed; width:100%;top:0;left:0; height:100vh; background-color:rgba(0, 0, 0, 0.5);z-index:4;}
+ 
+ .moption {font-family:bengali; background-color:white;color:black; font-size: 15px;  margin-bottom: 7px; width:calc(100% - 40px);text-align: left; border-width:0px; 
+border-radius: 0px; border-top-right-radius: 15px;border-bottom-right-radius: 10px; border-left-style: solid;border-color:#595E99; 
+outline : none; height:60px;padding:0 0 0 3px;float:left; box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);}
+
+.moption hr {border-color:#595E99;}
+
+.moption img {display: inline-block; vertical-align:middle;}
+
+.moption .material-icons {font-size:26px; color:#ff9e00; vertical-align: -7px; margin-top:-3px;margin-left:3px;}
+
+mathjax {display:inline-block;vertical-align:middle; text-align:left; margin-top:-15px; margin-bottom:-15px; font-size:13px;}
+
+.o {width: 25px;margin-bottom: 7px; background-color:#e6e6e6;color:black; border-radius:0px; border:0px solid #595E99; margin-left:7px; font-size:17px; border-top-left-radius: 10px;border-bottom-left-radius: 10px; border-left-width: 0px;height:60px;float:left;padding:0;text-align:center;box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);}
+
+.r {background-color:#423a78;color:white; }
+.g {background-color:#333333;color:white; }
+
+.age {float:left;font-size:15px}
+.aa {float:left;border-radius:100%;padding:2px; margin-right:5px;}
+
+.bb {width:80%; border-radius:20px;height:70px;}
+  
+.o2 {width:50%;float:left;margin-left:30px;background-color:red;}
+ben {font-family:Solaimanlipi;}
+
+.mqbox {background-color:white; margin: 20px 0px 35px 2.5%; padding-top:0px; padding-bottom: 0px;width:95%;float:left; border-radius: 15px; border-top-left-radius: 10px;border-top-right-radius: 10px;border-width:0px; border-bottom-width: 0px; border-color:#595E99; border-style: solid; box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5); font-family:quicksand;}
+
+.mquestion {font-family:bengali; background-color:white;font-size: 15px; color: black; font-style: normal; text-align:left;  padding-left: 8px; 
+padding-right: 2px;   width:calc(100% - 0px); min-height:70px;border-width:0px; border-radius: 0px; border-top-left-radius: 10px;border-top-right-radius: 10px; border-bottom-width: 2px;
+border-top-width: 0px; border-color:#595E99; border-style: solid; line-height:23px; margin: 0px 0px 7px 0px;}
+.mquestion abc {margin-left:0px;color:white;background-color:#008BC8;border:none;border-radius: 5px; padding:0px 2px 0px 2px;}
+
+.dbox {background-color:white;width:90%;height:330px;border-radius:5px;color:black;text-align:center;padding:20px 0px 0px 0px;font-family:quicksand;}
+.dbox hr { border:0;border-top: 2px solid #595E99;}
+.endpopup {display:none; height:250px;}
+.startpopup {display:none; height:180px;}
+.resetpopup {display:none; height:350px;}
+.submitpopup{display:none; height:250px;}
+
+dbox {position:fixed;bottom:120px;left:5%;z-index:4;width:100%}
+submitbox {position:fixed;bottom:120px;left:5%;z-index:5;width:100%}
+
+qb {background-color:white;color:black;text-align:center; box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);  font-size: 15px; width:calc(20% - 8px);border-radius:3px;font-family:quicksand;height:25px;margin:4px 4px 4px 4px; padding:0px; float:left; line-height:25px;}
+.qbb {height:10px; background-color:red}
+</style>
+
+</head>
+<body>
+<header>
+<div style="font-family:Zen Dots;position:absolute;opacity:0;">ZenDots</div>
+<div style="height:54px;"></div>
+<script>
+function showpage() {$("#popup2").fadeOut();$(".lockb").css('pointer-events','auto');}
+function hidepage() {delayloading();$(".lockb").css('pointer-events','none'); $('#popup2').show();}
+</script>
+<div id="popup2" class="popup2">
+<div class="loadshadow">
+<div class="loader">
+</div>
+<br/>
+<loading>LOADING</loading>
+</div>
+</div>
+
+<div id="msticky">
+<div class="msubhead">
+<button id="mclosebtn" class="lockb" onclick="toolicon()"><i class="m-i" style="font-size:25px;"><toolicon>&#xe5c4</toolicon></i></button>
+
+<toolimg></toolimg>
+<button class="tooltitle">
+<tool1>Mock Test</tool1><br/><tool2>Mock 1</tool2>
+</button>
+
+<button id="mclosebtnr" class="load" onclick="location.reload()"><i class="m-i" style="font-size:28px;">&#xe5d5</i></button>
+
+<button class="lockb" id="mclosebtnr" onclick="location.replace('shareme://')"><i class="m-i" style="font-size:25px;">&#xe80d</i></button>
+
+</div></div>
+
+<script>
+
+ function toolicon() {
+ if(sessionStorage.getItem('m1')) {window.history.back();}
+ else {location.replace('list-1.html'); }}
+ 
+onhashchange = function (){ if(location.hash){ } else{ $(".toggle,#belowpopup").fadeOut('fast'); }}
+
+ function historyback() { if(location.hash){ history.back(); }  }
+  
+ function showreset() {  location.hash = "go";$("#belowpopup").fadeIn('fast');$(".resetpopup").slideDown('fast'); }
+</script>
+
+<div id="belowpopup" onclick="historyback()";></div>
+<div id="belowend"></div>
+
+<submitbox>
+<div class="toggle resetpopup dbox">
+<button class="details">TOTAL QUESTIONS<br/><aq>7</aq></button>
+<button class="details">ANSWERED<br/><ya>0</ya></button>
+<hr/>
+<qb style="display:none">0</qb>
+<qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb>
+<qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb>
+<qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb>
+<qb>16</qb><qb>17</qb><qb>18</qb><qb>19</qb><qb>20</qb>
+<qb>21</qb><qb>22</qb><qb>23</qb><qb>24</qb><qb>25</qb>
+<qb>26</qb><qb>27</qb><qb>28</qb><qb>29</qb>
+<qb>30</qb>
+<button class="details confirm"  style="float:left; margin:10px 0px 0px calc(25% + 10px);" onclick="historyback()">CLOSE</button>
+</div>
+</submitbox>
+
+<submitbox>
+<div class="toggle submitpopup dbox">
+
+<button class="details">ALL QUESTIONS<br/><aq>7</aq></button>
+<button class="details">ANSWERED<br/><ya>0</ya></button>
+<button class="details">NO ANSWER<br/><na>7</na></button>
+<button class="details">TIME REMAINING<br/><end>01:00</end></button>
+
+<hr/><div align="center">
+Are you sure?
+<hr/>
+<button class="details confirm" onclick="historyback()">RESUME</button>
+<button class="details confirm" onclick="submit()">SUBMIT</button>
+</div></div>
+</submitbox>
+
+<dbox>
+<div class="endpopup dbox">
+<button class="details">ALL QUESTIONS<br/><aq>7</aq></button>
+<button class="details">ANSWERED<br/><ya>0</ya></button>
+<button class="details">NO ANSWER<br/><na>7</na></button>
+<button class="details">TIME REMAINING<br/>00:00</button>
+<hr/>
+<div align="center">
+No Time Available!
+<hr/>
+
+<button class="details confirm" onclick="submit()">SHOW RESULT</button>
+</div></div>
+</dbox>
+
+<dbox>
+<div class="startpopup dbox">
+<button class="details">ALL QUESTIONS<br/><aq>7</aq></button>
+
+<button class="details">TOTAL TIME<br/>1 Min.</button>
+<hr/>
+<div align="center">
+BEST OF LUCK!
+<hr/>
+
+<button class="details confirm" onclick="start()">START TEST</button>
+</div></div>
+</dbox>
+
+
+<language1 hidden>eng</language1>
+<ben hidden>বাংলা
+
+</header>
+
+<!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@6.7.1/swiper.min.css">
+
+  <!-- Swiper -->
+  <div class="swiper-container">
+  <div class="swiper-wrapper">
+
+<div class="swiper-slide">
+<div class='mqbox q1'>
+<button class="mquestion">
+<abc>Q.01</abc> পানিপথের প্রথম যুদ্ধ কত সালে সংঘটিত হয়?</button>
+
+<o1><button class='o 1'>A</button><button class='moption'>
+১৫২৫
+</button></o1>
+
+<o0><button class='o 0'>B</button><button class='moption'>
+১৫২৬
+</button></o0>
+
+<o2><button class='o 2'>C</button><button class='moption'>
+১৫২৭
+</button></o2>
+
+<o3><button class='o 3'>D</button><button class='moption'>
+১৫২৮
+</button></o3>
+
+<c><button class='o'>X</button><button class='moption'>
+Clear Answer
+</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q2'>
+<button class="mquestion">
+<abc>Q.02</abc> Question No.02</button>
+    
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q3'>
+<button class="mquestion">
+<abc>Q.03</abc> Question No.02</button>
+    <q3>
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	</q3>
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q4'>
+<button class="mquestion">
+<abc>Q.04</abc> Question No.04</button>
+    <q4>
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	</q4>
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q5'>
+<button class="mquestion">
+<abc>Q.05</abc> Question No.05</button>
+    <q5>
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	</q5>
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q6'>
+<button class="mquestion">
+<abc>Q.06</abc> Question No.06</button>
+    <q6>
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	</q6>
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+<div class="swiper-slide">
+<div class='mqbox q7'>
+<button class="mquestion">
+<abc>Q.07</abc> Question No.07</button>
+    <q7>
+    <o1>
+    <button class='o 1'>A</button><button class='moption'>
+    Option-1</button></o1>
+    <o2>
+    <button class='o 2'>B</button><button class='moption'>
+    Option-2</button></o2>
+	<o3>
+    <button class='o 3'>C</button><button class='moption'>
+    Option-3</button></o3>
+	<o0>
+    <button class='o 0'>D</button><button class='moption'>
+    Option-4</button></o0>
+	</q7>
+    <c>
+    <button class='o'>X</button><button class='moption'>
+    Clear Answer</button></c>
+
+</div></div>
+
+ </div></div>
+
+
+<quizbtn>
+<button class="dashboard" onclick="showreset();">
+DASHBOARD
+</button>
+<button class="resetb" onclick="showsub()"><share>SUBMIT</share></button>
+</quizbtn> 
+<next-previous-buttons>
+<button class="next-previous next-left"><i class="m-i">&#xe5cb</i></button>
+<button class="goshowleft change"onclick="mylanguage();">TIME REMAINING<br/><end>01:00</end></button>
+<button class="next-previous next-right"><i class="m-i">&#xe5cc</i></button>
+</next-previous-buttons>
+
+
+<!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@6.7.1/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+
+<script>
+var sw = new Swiper('.swiper-container',{loop: true, loopPreventsSlide: false,
+preloadImages: true, lazy: true,
+navigation: {nextEl: '.next-right',prevEl: '.next-left',},       });
+
+sw.on('transitionEnd', function() {$("html, body").animate({ scrollTop: "0" },"fast");
+
+localStorage.setItem('ns1', sw.activeIndex);  });
+var ns1 = localStorage.getItem('ns1');
+
+function gotoslide() {if (localStorage.getItem("ns1") === null) {
+sw.slideTo(1,0,true); }else {sw.slideTo(ns1,0,true);}  }
+
+
+$('qb').click(function(){var i = $('qb').index(this ); sw.slideTo(i,0,true); historyback();});
+
+
+    
+    gotoslide();
+   
+
+</script>
+
+ <script>
+ var l = localStorage,
+q1 = l.getItem('1q1'),
+q2 = l.getItem('1q2'),
+q3 = l.getItem('1q3'),
+q4 = l.getItem('1q4'),
+q5 = l.getItem('1q5'),
+q6 = l.getItem('1q6'),
+q7 = l.getItem('1q7'),
+ya = l.getItem('ya1'),
+na = l.getItem('na1');
+
+function q1w1(){l.setItem('1q1','1');}
+function q1w2(){l.setItem('1q1','2');}
+function q1w3(){l.setItem('1q1','3');}
+function q1c(){l.setItem('1q1','0');}
+function q1cl(){ l.removeItem('1q1');}
+
+function q2w1(){l.setItem('1q2','1');}
+function q2w2(){l.setItem('1q2','2');}
+function q2w3(){l.setItem('1q2','3');}
+function q2c(){l.setItem('1q2','0');}
+function q2cl(){ l.removeItem('1q2');}
+
+function q3w1(){l.setItem('1q3','1');}
+function q3w2(){l.setItem('1q3','2');}
+function q3w3(){l.setItem('1q3','3');}
+function q3c(){l.setItem('1q3','0');}
+function q3cl(){ l.removeItem('1q3');}
+
+function q4w1(){l.setItem('1q4','1');}
+function q4w2(){l.setItem('1q4','2');}
+function q4w3(){l.setItem('1q4','3');}
+function q4c(){l.setItem('1q4','0');}
+function q4cl(){ l.removeItem('1q4');}
+
+function q5w1(){l.setItem('1q5','1');}
+function q5w2(){l.setItem('1q5','2');}
+function q5w3(){l.setItem('1q5','3');}
+function q5c(){l.setItem('1q5','0');}
+function q5cl(){ l.removeItem('1q5');}
+
+function q6w1(){l.setItem('1q6','1');}
+function q6w2(){l.setItem('1q6','2');}
+function q6w3(){l.setItem('1q6','3');}
+function q6c(){l.setItem('1q6','0');}
+function q6cl(){ l.removeItem('1q6');}
+
+function q7w1(){l.setItem('1q7','1');}
+function q7w2(){l.setItem('1q7','2');}
+function q7w3(){l.setItem('1q7','3');}
+function q7c(){l.setItem('1q7','0');}
+function q7cl(){ l.removeItem('1q7');}
+
+function plus() {var y = $('ya'), n = $('na');  y.html(Number(y.html())+1); l.setItem('ya1', y.html()); n.html(Number(n.html())-1); l.setItem('na1', n.html());}
+function minus() {var y = $('ya'), n = $('na');  y.html(Number(y.html())-1); l.setItem('ya1', y.html()); n.html(Number(n.html())+1); l.setItem('na1', n.html());}
+
+
+ </script>
+ <script>
+var n1,n2,n3,n4,n5,n6,n7;
+ function cont(){
+
+if(ya){$('ya').html(ya);}
+if(na){$('na').html(na);}
+	
+if(q1 !== null){$('qb:eq(1)').addClass('r'); n1='1';}
+if(q1 === '1'){$('.q1 .1').addClass('r');}
+if(q1 === '2'){$('.q1 .2').addClass('r');}
+if(q1 === '3'){$('.q1 .3').addClass('r');}
+if(q1 === '0'){$('.q1 .0').addClass('r');}
+
+if(q2 !== null){$('qb:eq(2)').addClass('r'); n2='1';}
+if(q2 === '1'){$('.q2 .1').addClass('r');}
+if(q2 === '2'){$('.q2 .2').addClass('r');}
+if(q2 === '3'){$('.q2 .3').addClass('r');}
+if(q2 === '0'){$('.q2 .0').addClass('r');}
+
+if(q3 !== null){$('qb:eq(3)').addClass('r'); n3='1';}
+if(q3 === '1'){$('.q3 .1').addClass('r');}
+if(q3 === '2'){$('.q3 .2').addClass('r');}
+if(q3 === '3'){$('.q3 .3').addClass('r');}
+if(q3 === '0'){$('.q3 .0').addClass('r');}
+
+if(q4 !== null){$('qb:eq(4)').addClass('r'); n4='1';}
+if(q4 === '1'){$('.q4 .1').addClass('r');}
+if(q4 === '2'){$('.q4 .2').addClass('r');}
+if(q4 === '3'){$('.q4 .3').addClass('r');}
+if(q4 === '0'){$('.q4 .0').addClass('r');}
+
+if(q5 !== null){$('qb:eq(5)').addClass('r'); n5='1';}
+if(q5 === '1'){$('.q5 .1').addClass('r');}
+if(q5 === '2'){$('.q5 .2').addClass('r');}
+if(q5 === '3'){$('.q5 .3').addClass('r');}
+if(q5 === '0'){$('.q5 .0').addClass('r');}
+
+if(q6 !== null){$('qb:eq(6)').addClass('r'); n6='1';}
+if(q6 === '1'){$('.q6 .1').addClass('r');}
+if(q6 === '2'){$('.q6 .2').addClass('r');}
+if(q6 === '3'){$('.q6 .3').addClass('r');}
+if(q6 === '0'){$('.q6 .0').addClass('r');}
+
+if(q7 !== null){$('qb:eq(7)').addClass('r'); n7='1';}
+if(q7 === '1'){$('.q7 .1').addClass('r');}
+if(q7 === '2'){$('.q7 .2').addClass('r');}
+if(q7 === '3'){$('.q7 .3').addClass('r');}
+if(q7 === '0'){$('.q7 .0').addClass('r');}
+}
+ 
+ </script>
+
+
+<script>
+
+$(document).ready(function () {
+
+$("button").click(function(){$(this).blur();});
+   
+$(".q1 o1").click(function(){q1w1(); pq1(); $('.q1 .1').addClass('r');});
+$(".q1 o2").click(function(){q1w2(); pq1();$('.q1 .2').addClass('r');});
+$(".q1 o3").click(function(){q1w3();pq1(); $('.q1 .3').addClass('r');});
+$(".q1 o0").click(function(){q1c(); pq1(); $('.q1 .0').addClass('r');});
+$(".q1 c").click(function(){q1cl(); mq1(); });
+
+function pq1(){ if(n1!='1') { plus();  n1='1';} $('.q1 .o').removeClass('r');$('qb:eq(1)').addClass('r');}
+function mq1(){if(n1=='1') { minus(); n1='0';} $('.q1 .o, qb:eq(1)').removeClass('r'); }
+
+$(".q2 o1").click(function(){q2w1();pq2(); $('.q2 .1').addClass('r');});
+$(".q2 o2").click(function(){q2w2(); pq2();$('.q2 .2').addClass('r');});
+$(".q2 o3").click(function(){q2w3();pq2(); $('.q2 .3').addClass('r');});
+$(".q2 o0").click(function(){q2c(); pq2(); $('.q2 .0').addClass('r');});
+$(".q2 c").click(function(){q2cl(); mq2(); });
+
+function pq2(){ if(n2!='1') { plus(); n2='1';}$('.q2 .o').removeClass('r'); $('qb:eq(2)').addClass('r');}
+function mq2(){if(n2=='1') { minus(); n2='0';}$('.q2 .o, qb:eq(2)').removeClass('r'); }
+   
+$(".q3 o1").click(function(){q3w1();pq3(); $('.q3 .1').addClass('r');});
+$(".q3 o2").click(function(){q3w2(); pq3();$('.q3 .2').addClass('r');});
+$(".q3 o3").click(function(){q3w3();pq3(); $('.q3 .3').addClass('r');});
+$(".q3 o0").click(function(){q3c(); pq3(); $('.q3 .0').addClass('r');});
+$(".q3 c").click(function(){q3cl(); mq3(); });
+
+function pq3(){ if(n3!='1') { plus(); n3='1';} $('.q3 .o').removeClass('r'); $('qb:eq(3)').addClass('r');}
+function mq3(){if(n3=='1') { minus(); n3='0';} $('.q3 .o, qb:eq(3)').removeClass('r'); }
+   
+$(".q4 o1").click(function(){q4w1();pq4(); $('.q4 .1').addClass('r');});
+$(".q4 o2").click(function(){q4w2(); pq4();$('.q4 .2').addClass('r');});
+$(".q4 o3").click(function(){q4w3();pq4(); $('.q4 .3').addClass('r');});
+$(".q4 o0").click(function(){q4c(); pq4(); $('.q4 .0').addClass('r');});
+$(".q4 c").click(function(){q4cl(); mq4(); });
+
+function pq4(){if(n4!='1') { plus(); n4='1';} $('.q4 .o').removeClass('r'); $('qb:eq(4)').addClass('r');}
+function mq4(){if(n4=='1') { minus(); n4='0';} $('.q4 .o, qb:eq(4)').removeClass('r'); }
+
+$(".q5 o1").click(function(){q5w1();pq5(); $('.q5 .1').addClass('r');});
+$(".q5 o2").click(function(){q5w2(); pq5();$('.q5 .2').addClass('r');});
+$(".q5 o3").click(function(){q5w3();pq5(); $('.q5 .3').addClass('r');});
+$(".q5 o0").click(function(){q5c(); pq5(); $('.q5 .0').addClass('r');});
+$(".q5 c").click(function(){q5cl(); mq5(); });
+
+function pq5(){if(n5!='1') { plus(); n5='1';} $('.q5 .o').removeClass('r'); $('qb:eq(5)').addClass('r');}
+function mq5(){if(n5=='1') { minus(); n5='0';} $('.q5 .o, qb:eq(5)').removeClass('r'); }
+   
+$(".q6 o1").click(function(){q6w1();pq6(); $('.q6 .1').addClass('r');});
+$(".q6 o2").click(function(){q6w2(); pq6();$('.q6 .2').addClass('r');});
+$(".q6 o3").click(function(){q6w3();pq6(); $('.q6 .3').addClass('r');});
+$(".q6 o0").click(function(){q6c(); pq6(); $('.q6 .0').addClass('r');});
+$(".q6 c").click(function(){q6cl(); mq6(); });
+
+function pq6(){if(n6!='1') { plus(); n6='1';} $('.q6 .o').removeClass('r'); $('qb:eq(6)').addClass('r');}
+function mq6(){if(n6=='1') { minus(); n6='0';} $('.q6 .o, qb:eq(6)').removeClass('r'); }
+   
+$(".q7 o1").click(function(){q7w1();pq7(); $('.q7 .1').addClass('r');});
+$(".q7 o2").click(function(){q7w2(); pq7();$('.q7 .2').addClass('r');});
+$(".q7 o3").click(function(){q7w3();pq7(); $('.q7 .3').addClass('r');});
+$(".q7 o0").click(function(){q7c(); pq7(); $('.q7 .0').addClass('r');});
+$(".q7 c").click(function(){q7cl(); mq7(); });
+
+function pq7(){if(n7!='1') { plus(); n7='1';} $('.q7 .o').removeClass('r'); $('qb:eq(7)').addClass('r');}
+function mq7(){if(n7=='1') { minus(); n7='0';} $('.q7 .o, qb:eq(7)').removeClass('r'); }
+      
+      
+});
+
+</script>
+
+
+
+
+<script>
+var l = localStorage;
+var end = document.getElementsByTagName('end');
+
+function start() {
+end[0].innerHTML = "01:00";
+end[1].innerHTML = "01:00";
+
+l.setItem('s1', '1');
+l.removeItem('e1');
+l.setItem('d1', +new Date);
+$("#belowend,.startpopup").fadeOut('fast');}
+
+function ut() {
+  ot = new Date(parseInt(l.getItem('d1')));
+  nt = new Date(); td = nt - ot;  td /= 1000;
+  sec = Math.round(td);
+  dif = 100 - sec;
+  h = Math.floor(dif / 60 / 60);
+  ht = h.toString().padStart(2, '0')
+  m = Math.floor(dif / 60) - (h * 60);
+  mt = m.toString().padStart(2, '0');
+  s = dif % 60;
+  st = s.toString().padStart(2, '0');
+  show = mt + ':' + st;
+  
+  l.setItem('sec1', sec);
+  
+if (dif <= 0) {
+ end[0].innerHTML = "00:00";
+end[1].innerHTML = "00:00";
+ l.removeItem('s1');
+ l.setItem('e1', '1');
+
+autosubmit();
+l.setItem('sec1', '60');
+}
+ 
+else { end[0].innerHTML = show; end[1].innerHTML = show;
+
+}}
+
+function timeupdate(){
+if(l.getItem('e1')) {end[0].innerHTML = "00:00"; end[1].innerHTML = "00:00";}
+
+if(l.getItem('s1')) {end[0].innerHTML = "LOADING"; end[1].innerHTML = "LOADING";}
+
+setInterval(function(){ if(l.getItem('s1')) {ut();} }, 1000); 
+setTimeout(function(){ showpage();}, 1000); 
+
+}
+
+function submit() {l.removeItem('s1'); l.setItem('e1', '1');hidepage(); 
+if(location.hash){ history.back(); location.replace('result-1.html');} else { location.replace('result-1.html')}}
+
+function showsub() {location.hash = "go"; $("#belowpopup").fadeIn('fast');$(".submitpopup").slideDown('fast');}
+
+function autosubmit(){if($('#belowpopup').is(':visible')){history.back();$("#belowend,.endpopup").show();}
+else { $("#belowend").show();$(".endpopup").show(); }
+
+  }
+
+timeupdate();
+</script>
+
+
+<script>
+
+ $(document).ready(function() {
+
+if(l.getItem('e1')) {autosubmit(); showpage();}
+if(l.getItem('d1') === null) {$("#belowend,.startpopup").show();}
+ 
+   if(location.hash){history.back();}
+   $('.tooltitle').delay(500).slideDown('slow');
+   
+
+}); 
+$(document).ready(function() { cont(); });
+window.onload = function() {}
+$('.load').click(function(){hidepage();});
+</script>
+<link rel="prefetch" href="list1.html"/>
+<link rel="prefetch" href="result1.html"/>
+    
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124695825-3"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'UA-124695825-3');
+</script>
+
+
+
+</body>
+</html>
