@@ -187,7 +187,7 @@ function hidepage() {delayloading();$(".lockb").css('pointer-events','none'); $(
 
  function toolicon() {
  if(sessionStorage.getItem('m1')) {window.history.back();}
- else {location.replace('mock1/list-1.html'); }}
+ else {location.replace('mock-1/list-1.html'); }}
  
 onhashchange = function (){ if(location.hash){ } else{ $(".toggle,#belowpopup").fadeOut('fast'); }}
 
@@ -731,7 +731,7 @@ setTimeout(function(){ showpage();}, 1000);
 }
 
 function submit() {l.removeItem('s1'); l.setItem('e1', '1');hidepage(); 
-if(location.hash){ history.back(); location.replace('mock1/result-1.html');} else { location.replace('mock1/result-1.html')}}
+if(location.hash){ history.back(); location.replace('mock-1/result-1.html');} else { location.replace('mock-1/result-1.html')}}
 
 function showsub() {location.hash = "go"; $("#belowpopup").fadeIn('fast');$(".submitpopup").slideDown('fast');}
 
@@ -760,8 +760,8 @@ $(document).ready(function() { cont(); });
 window.onload = function() {}
 $('.load').click(function(){hidepage();});
 </script>
-<link rel="prefetch" href="mock1/list1.html"/>
-<link rel="prefetch" href="mock1/result1.html"/>
+<link rel="prefetch" href="mock-1/list1.html"/>
+<link rel="prefetch" href="mock-1/result1.html"/>
     
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
