@@ -1,0 +1,135 @@
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<style>
+input {width:calc(100% - 100px); height:30px;}
+button {width:100px}
+textarea {width:100%;height:200px;}
+</style>
+
+<h2>OPTION B Is Correct</h2>
+
+Question No.<br/><input type='text' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
+Question<br/><input type='text' id='qs'  oninput='save();'/><button onclick='clearqs()'>CLEAR</button><br/>
+Option A<br/><input type='text' id='oa' oninput='save();' /><button onclick='clearoa()'>CLEAR</button><br/>
+Option B<br/><input type='text' id='ob' oninput='save();'/><button onclick='clearob()'>CLEAR</button><br/>
+Option C<br/><input type='text' id='oc' oninput='save();'/><button onclick='clearoc()'>CLEAR</button><br/>
+Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clearod()'>CLEAR</button><br/>
+
+
+<button onclick='pasteall()'><gen>Generate</gen></button>
+<button onclick='clearall()'>Clear All</button>
+
+<hr/>
+<textarea id='main' name='w3review' rows='20' cols='50'></textarea>
+<button onclick='copyall()'><message>Copy All</message></button>
+<script>
+var l = localStorage,
+message = document.querySelector('message'),
+gen = document.querySelector('gen'),
+qn = document.getElementById('qn'),
+qs = document.getElementById('qs'),
+oa = document.getElementById('oa'),
+ob = document.getElementById('ob'),
+oc = document.getElementById('oc'),
+od = document.getElementById('od'),
+main = document.getElementById('main'),
+p1 = "<div class='swiper-slide'><div class='mqbox q",
+p2 = "'><button class='mquestion'><srl>Q.",
+p3 = "</srl> ",
+p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
+p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
+p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
+p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
+p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
+p9 = "</button></opt></div></div>"
+
+
+function update(){
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;}
+
+function blank(){
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+main.value = 'Some fields are empty';}
+
+function pasteall() {
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+
+if (qnv =='') { blank();}
+else if  (qsv =='') {blank();}
+else if  (oav =='') {blank();}
+else if  (obv =='') {blank();}
+else if  (ocv =='') {blank();}
+else if  (odv =='') {blank();}
+else {update();}
+
+gen.innerHTML = 'Completed';
+setTimeout(function(){gen.innerHTML = 'Generate';},1000);
+}
+
+
+</script>
+
+
+
+<script>
+
+
+function qp(){l.removeItem('3qp'); pasteall();}
+
+function clearall(){l.removeItem('3q'); qp(); location.reload();}
+function clearqn(){l.removeItem('3qn'); qn.value='';qp();}
+function clearqs(){l.removeItem('3qs'); qs.value='';qp();}
+function clearoa(){l.removeItem('3oa'); oa.value='';qp();}
+function clearob(){l.removeItem('3ob'); ob.value='';qp();}
+function clearoc(){l.removeItem('3oc'); oc.value='';qp();}
+function clearod(){l.removeItem('3od'); od.value='';qp();}
+
+function save(){
+l.setItem('3qp','1'); 
+l.setItem('3q','1'); 
+l.setItem('3qn',qn.value);
+l.setItem('3qs',qs.value); 
+l.setItem('3oa',oa.value); 
+l.setItem('3ob',ob.value); 
+l.setItem('3oc',oc.value); 
+l.setItem('3od',od.value); 
+}
+if (l.getItem('3q')) { 
+qn.value = l.getItem('3qn');
+qs.value = l.getItem('3qs');
+qs.value = l.getItem('3qs');
+oa.value = l.getItem('3oa');
+ob.value = l.getItem('3ob');
+oc.value = l.getItem('3oc');
+od.value = l.getItem('3od');
+}
+
+function copyall() {
+
+main.select();
+main.setSelectionRange(0, 99999);
+document.execCommand('copy');
+message.innerHTML = 'Copied';
+setTimeout(function(){message.innerHTML = 'Copy All';},1000);
+}
+
+
+$(document).ready(function() {if (l.getItem('3qp')) { pasteall()} ;});
+</script>
+
+
