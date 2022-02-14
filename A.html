@@ -10,14 +10,12 @@ textarea {width:100%;height:200px;}
 qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
 </style>
 
-<h2>OPTION A Is Correct</h2>
+<h2>OPTION B Is Correct</h2>
 
 <qb style="display:none">0</qb>
 <qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb>
 <qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb>
 <qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb>
-
-
 <hr/>
 
 Question No.<br/><input type='text' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
@@ -28,7 +26,7 @@ Option C<br/><input type='text' id='oc' oninput='save();'/><button onclick='clea
 Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clearod()'>CLEAR</button><br/>
 
 
-<button onclick='pasteall()'><gen>Generate</gen></button>
+<button onclick='getvalue()'><gen>Generate</gen></button>
 <button onclick='clearall()'>Clear All</button>
 
 <hr/>
@@ -75,11 +73,17 @@ oav = oa.value,
 obv = ob.value,
 ocv = oc.value,
 odv = od.value;
-main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+oav+p9;}
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;
 
-function blank(){main.value = 'Some fields are empty';}
 
-function pasteall() {
+var q = qn.value;
+gen.innerHTML =  'Done Q.'+q;
+
+}
+
+function blank(){gen.innerHTML = 'Empty Field'; }
+
+function getvalue() {
 var qnv = qn.value,
 qsv = qs.value,
 oav = oa.value,
@@ -94,9 +98,7 @@ else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {update();}
-var q = qn.value;
-gen.innerHTML =  'Saved';
-setTimeout(function(){gen.innerHTML = 'Save Q.'+q;},1000);
+
 
 }
 
@@ -108,44 +110,48 @@ setTimeout(function(){gen.innerHTML = 'Save Q.'+q;},1000);
 <script>
 
 
-function qp(){l.removeItem('aqp'); pasteall();}
+function qp(){l.removeItem('bqp'); getvalue();}
 
-function clearall(){l.removeItem('aq'); qp(); location.reload();}
-function clearqn(){l.removeItem('aqn'); qn.value='';qp();}
-function clearqs(){l.removeItem('aqs'); qs.value='';qp();}
-function clearoa(){l.removeItem('aoa'); oa.value='';qp();}
-function clearob(){l.removeItem('aob'); ob.value='';qp();}
-function clearoc(){l.removeItem('aoc'); oc.value='';qp();}
-function clearod(){l.removeItem('aod'); od.value='';qp();}
+function clearall(){l.removeItem('bq'); qp(); location.reload();}
+function clearqn(){l.removeItem('bqn'); qn.value='';qp();}
+function clearqs(){l.removeItem('bqs'); qs.value='';qp();}
+function clearoa(){l.removeItem('boa'); oa.value='';qp();}
+function clearob(){l.removeItem('bob'); ob.value='';qp();}
+function clearoc(){l.removeItem('boc'); oc.value='';qp();}
+function clearod(){l.removeItem('bod'); od.value='';qp();}
 
 function save(){
-l.setItem('aqp','1'); 
-l.setItem('aq','1'); 
-l.setItem('aqn',qn.value);
-l.setItem('aqs',qs.value); 
-l.setItem('aoa',oa.value); 
-l.setItem('aob',ob.value); 
-l.setItem('aoc',oc.value); 
-l.setItem('aod',od.value); 
+l.setItem('bqp','1'); 
+l.setItem('bq','1'); 
+l.setItem('bqn',qn.value);
+l.setItem('bqs',qs.value); 
+l.setItem('boa',oa.value); 
+l.setItem('bob',ob.value); 
+l.setItem('boc',oc.value); 
+l.setItem('bod',od.value); 
 
 var q = qn.value;
 gen.innerHTML = 'Save Q.'+q;
 
 
 }
-if (l.getItem('aq')) { 
-qn.value = l.getItem('aqn');
-qs.value = l.getItem('aqs');
-qs.value = l.getItem('aqs');
-oa.value = l.getItem('aoa');
-ob.value = l.getItem('aob');
-oc.value = l.getItem('aoc');
-od.value = l.getItem('aod');
+if (l.getItem('bq')) { 
+qn.value = l.getItem('bqn');
+qs.value = l.getItem('bqs');
+qs.value = l.getItem('bqs');
+oa.value = l.getItem('boa');
+ob.value = l.getItem('bob');
+oc.value = l.getItem('boc');
+od.value = l.getItem('bod');
 }
 
 function copyall() {
 
-l.setItem('qn1',main.value); 
+
+if(qn.value=='1'){
+l.setItem('qn1',main.value); }
+if(qn.value=='2'){
+l.setItem('qn2',main.value); }
 
 main.select();
 main.setSelectionRange(0, 99999);
@@ -156,13 +162,17 @@ setTimeout(function(){gen.innerHTML =  'Generate Q.'+q;},1000);
 }
 
 function repaste() {
-var qn1 = l.getItem('qn1');
-cq.value = qn1;
+var qn1 = l.getItem('qn1'),
+qn2=l.getItem('qn2');
+cq.value = qn1+qn2;
 }
 
 
-$(document).ready(function() {if (l.getItem('aqp')) { pasteall()} ;});
+$(document).ready(function() {if (l.getItem('bqp')) { getvalue()}     repaste();   ;});
 </script>
+
+
+
 
 
 
