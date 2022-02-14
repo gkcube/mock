@@ -1,22 +1,21 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <style>
 
 input {width:calc(100% - 100px); height:30px;}
 .cq {width:50%}
-button {width:100px}
+
 textarea {width:100%;height:200px;}
+#main {height:100px;}
 qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
 </style>
 
-<h2>OPTION B Is Correct</h2>
+<h2>OPTION B is Correct</h2>
 <button onclick="location.replace('A.html')">A</button>
-<button style='background-color:yellow;'  onclick="location.replace('B.html')">B</button>
+<button style='background-color:yellow;' onclick="location.replace('B.html')">B</button>
 <button onclick="location.replace('C.html')">C</button>
 <button onclick="location.replace('D.html')">D</button>
-<qb style="display:none">0</qb>
-<qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb>
-<qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb>
-<qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb>
 <hr/>
 
 Question No.<br/><input type='text' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
@@ -27,22 +26,23 @@ Option C<br/><input type='text' id='oc' oninput='save();'/><button onclick='clea
 Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clearod()'>CLEAR</button><br/>
 
 
-<button onclick='getvalue()'><gen>Generate</gen></button>
-<button onclick='clearall()'>Clear All</button>
+<button onclick='getvalue()'><gen>Create</gen></button>
+<button onclick='ownpaste();'><paste>-</paste></button>
+<button onclick='clearall()'>Clear Options</button>
 
 <hr/>
-<textarea id='main' readonly></textarea>
-<button onclick='copyall()'><message>Save Question</message></button>
+<textarea hidden id='main' readonly></textarea>
 
+
+All questions are saved in the below box <button onclick='clearbox()'>Clear box for new set</button><hr/>
 <textarea id='cq' readonly></textarea>
 
-<button onclick='repaste()'><message>Repaste</message></button>
-<button onclick='qn()'><qn>Q.1</qn></button>
-<button onclick='qn()'><qn>Q.2</qn></button>
+
+
 
 <script>
 var l = localStorage,
-message = document.querySelector('message'),
+paste = document.querySelector('paste'),
 gen = document.querySelector('gen'),
 qn = document.getElementById('qn'),
 qs = document.getElementById('qs'),
@@ -51,15 +51,17 @@ ob = document.getElementById('ob'),
 oc = document.getElementById('oc'),
 od = document.getElementById('od'),
 main = document.getElementById('main'),
+q1='',q2='',q3='',q4='',
+
 cq = document.getElementById('cq'),
 p1 = "<div class='swiper-slide'><div class='mqbox q",
 p2 = "'><button class='mquestion'><srl>Q.",
 p3 = "</srl> ",
-p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>B</button><button class='optn'>",
-p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
-p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
-p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
-p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
+p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
+p5 = "</button></o1><o0><button class='o 0'>B</button><button class='optn'>",
+p6 = "</button></o0><o2><button class='o 2'>C</button><button class='optn'>",
+p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
+p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>B</button><button class='optn'>",
 p9 = "</button></opt></div></div>"
 
 
@@ -70,15 +72,15 @@ oav = oa.value,
 obv = ob.value,
 ocv = oc.value,
 odv = od.value;
-main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+odv+p9;
 
 
 var q = qn.value;
-gen.innerHTML =  'Done Q.'+q;
+gen.innerHTML =  'Q.'+q+' Created';
 
 }
 
-function blank(){gen.innerHTML = 'Empty Field'; }
+function blank(){gen.innerHTML = 'Please fill all options'; }
 
 function getvalue() {
 var qnv = qn.value,
@@ -94,78 +96,90 @@ else if  (oav =='') {blank();}
 else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
-else {update();}
+else {update(); copyall();}}
 
+function clearall(){l.removeItem('aq'); location.reload();}
+function clearqn(){l.removeItem('aqn'); qn.value='';}
+function clearqs(){l.removeItem('aqs'); qs.value='';}
+function clearoa(){l.removeItem('aoa'); oa.value='';}
+function clearob(){l.removeItem('aob'); ob.value='';}
+function clearoc(){l.removeItem('aoc'); oc.value='';}
+function clearod(){l.removeItem('aod'); od.value='';}
 
-}
-
-
-</script>
-
-
-
-<script>
-
-
-function qp(){l.removeItem('bqp'); getvalue();}
-
-function clearall(){l.removeItem('bq'); qp(); location.reload();}
-function clearqn(){l.removeItem('bqn'); qn.value='';qp();}
-function clearqs(){l.removeItem('bqs'); qs.value='';qp();}
-function clearoa(){l.removeItem('boa'); oa.value='';qp();}
-function clearob(){l.removeItem('bob'); ob.value='';qp();}
-function clearoc(){l.removeItem('boc'); oc.value='';qp();}
-function clearod(){l.removeItem('bod'); od.value='';qp();}
+function clearbox(){
+l.removeItem('q1');
+l.removeItem('q2');
+l.removeItem('q3');
+l.removeItem('q4');
+cq.value='';}
 
 function save(){
-l.setItem('bqp','1'); 
-l.setItem('bq','1'); 
-l.setItem('bqn',qn.value);
-l.setItem('bqs',qs.value); 
-l.setItem('boa',oa.value); 
-l.setItem('bob',ob.value); 
-l.setItem('boc',oc.value); 
-l.setItem('bod',od.value); 
+l.setItem('aq','1'); 
+l.setItem('aqn',qn.value);
+l.setItem('aqs',qs.value); 
+l.setItem('aoa',oa.value); 
+l.setItem('aob',ob.value); 
+l.setItem('aoc',oc.value); 
+l.setItem('aod',od.value); 
 
 var q = qn.value;
-gen.innerHTML = 'Save Q.'+q;
-
+if(q!=''){gen.innerHTML = 'Create Q.'+q;}else{gen.innerHTML = 'Create'}
 
 }
-if (l.getItem('bq')) { 
-qn.value = l.getItem('bqn');
-qs.value = l.getItem('bqs');
-qs.value = l.getItem('bqs');
-oa.value = l.getItem('boa');
-ob.value = l.getItem('bob');
-oc.value = l.getItem('boc');
-od.value = l.getItem('bod');
+if (l.getItem('aq')) { 
+qn.value = l.getItem('aqn');
+qs.value = l.getItem('aqs');
+qs.value = l.getItem('aqs');
+oa.value = l.getItem('aoa');
+ob.value = l.getItem('aob');
+oc.value = l.getItem('aoc');
+od.value = l.getItem('aod');
 }
 
 function copyall() {
-
-
-if(qn.value=='1'){
-l.setItem('qn1',main.value); }
-if(qn.value=='2'){
-l.setItem('qn2',main.value); }
-
+var q = qn.value;
+if(qn.value==q){l.setItem('q'+q,main.value); }
 main.select();
 main.setSelectionRange(0, 99999);
 document.execCommand('copy');
-var q = qn.value;
-gen.innerHTML = 'Done';
-setTimeout(function(){gen.innerHTML =  'Generate Q.'+q;},1000);
+paste.innerHTML = ' Save Q.'+q+' Below';}
+
+function getpaste(){
+if(l.getItem('q1')){q1=l.getItem('q1')}
+if(l.getItem('q2')){q2=l.getItem('q2')}
+if(l.getItem('q3')){q3=l.getItem('q3')}
+if(l.getItem('q4')){q4=l.getItem('q4')}
+
 }
 
-function repaste() {
-var qn1 = l.getItem('qn1'),
-qn2=l.getItem('qn2');
-cq.value = qn1+qn2;
+function ownpaste() {
+
+getpaste();
+var q = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+if (q=='') { blank();}
+else if  (qsv =='') {blank();}
+else if  (oav =='') {blank();}
+else if  (obv =='') {blank();}
+else if  (ocv =='') {blank();}
+else if  (odv =='') {blank();}
+else {
+cq.value = q1+q2+q3+q4;
+paste.innerHTML = ' Q.'+q+' Saved';}}
+
+
+function autopaste(){
+
+getpaste();
+cq.value = q1+q2+q3+q4;
 }
 
 
-$(document).ready(function() {if (l.getItem('bqp')) { getvalue()}     repaste();   ;});
+$(document).ready(function() {   autopaste();   });
 </script>
 
 
