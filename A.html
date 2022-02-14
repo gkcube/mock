@@ -27,14 +27,14 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 
 
 <button onclick='getvalue()'><gen>Create</gen></button>
-<button onclick='repaste()'><paste>-</paste></button>
+<button onclick='repaste();notice();'><paste>-</paste></button>
 <button onclick='clearall()'>Clear Options</button>
 
 <hr/>
 <textarea hidden id='main' readonly></textarea>
 
 
-
+All questions are saved in the below box <button onclick='clearbox()'>Clear box for new set</button><hr/>
 <textarea id='cq' readonly></textarea>
 
 
@@ -75,11 +75,11 @@ main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;
 
 
 var q = qn.value;
-gen.innerHTML =  'Q.'+q+' Done';
+gen.innerHTML =  'Q.'+q+' Created';
 
 }
 
-function blank(){gen.innerHTML = 'Fill All Box'; }
+function blank(){gen.innerHTML = 'Please fill all options'; }
 
 function getvalue() {
 var qnv = qn.value,
@@ -114,6 +114,8 @@ function clearob(){l.removeItem('aob'); ob.value='';qp();}
 function clearoc(){l.removeItem('aoc'); oc.value='';qp();}
 function clearod(){l.removeItem('aod'); od.value='';qp();}
 
+function clearbox(){l.removeItem('qn1');l.removeItem('qn2');cq.value='';}
+
 function save(){
 l.setItem('aqp','1'); 
 l.setItem('aq','1'); 
@@ -126,7 +128,7 @@ l.setItem('aod',od.value);
 
 var q = qn.value;
 gen.innerHTML = 'Create Q.'+q;
-
+l.removeItem('r1');
 
 }
 if (l.getItem('aq')) { 
@@ -151,14 +153,22 @@ main.select();
 main.setSelectionRange(0, 99999);
 document.execCommand('copy');
 var q = qn.value;
-paste.innerHTML = ' Save Q.'+q+'Below';
+paste.innerHTML = ' Save Q.'+q+' Below';
 }
 
 function repaste() {
 var qn1 = l.getItem('qn1'),
 qn2=l.getItem('qn2');
+
 cq.value = qn1+qn2;
+
+
 }
+
+function notice(){var q = qn.value;
+
+paste.innerHTML = ' Q.'+q+' Saved';}
+
 
 
 $(document).ready(function() {if (l.getItem('aqp')) { getvalue()}     repaste();   ;});
