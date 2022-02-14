@@ -2,12 +2,23 @@
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <style>
+
 input {width:calc(100% - 100px); height:30px;}
+.cq {width:50%}
 button {width:100px}
 textarea {width:100%;height:200px;}
+qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
 </style>
 
-<h2>OPTION B Is Correct</h2>
+<h2>OPTION A Is Correct</h2>
+
+<qb style="display:none">0</qb>
+<qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb>
+<qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb>
+<qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb>
+
+
+<hr/>
 
 Question No.<br/><input type='text' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
 Question<br/><input type='text' id='qs'  oninput='save();'/><button onclick='clearqs()'>CLEAR</button><br/>
@@ -21,8 +32,19 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 <button onclick='clearall()'>Clear All</button>
 
 <hr/>
-<textarea id='main' name='w3review' rows='20' cols='50'readonly></textarea>
-<button onclick='copyall()'><message>Copy All</message></button>
+<textarea id='main' readonly></textarea>
+<button onclick='copyall()'><message>Save Question</message></button>
+
+<br/>
+Check Last Saved Questions:<br/>
+Type Any Question Number:<br/>
+<input id='qn' class='cq' type='number'><button onclick='cq()'>Show</button><br/>
+<textarea id='cq' readonly></textarea>
+
+<button onclick='repaste()'><message>Repaste</message></button>
+<button onclick='qn()'><qn>Q.1</qn></button>
+<button onclick='qn()'><qn>Q.2</qn></button>
+
 <script>
 var l = localStorage,
 message = document.querySelector('message'),
@@ -34,14 +56,15 @@ ob = document.getElementById('ob'),
 oc = document.getElementById('oc'),
 od = document.getElementById('od'),
 main = document.getElementById('main'),
+cq = document.getElementById('cq'),
 p1 = "<div class='swiper-slide'><div class='mqbox q",
 p2 = "'><button class='mquestion'><srl>Q.",
 p3 = "</srl> ",
-p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
-p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
-p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
-p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
-p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
+p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o0><button class='o 0'>A</button><button class='optn'>",
+p5 = "</button></o0><o1><button class='o 1'>B</button><button class='optn'>",
+p6 = "</button></o1><o2><button class='o 2'>C</button><button class='optn'>",
+p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
+p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>A</button><button class='optn'>",
 p9 = "</button></opt></div></div>"
 
 
@@ -52,16 +75,9 @@ oav = oa.value,
 obv = ob.value,
 ocv = oc.value,
 odv = od.value;
-main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;}
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+oav+p9;}
 
-function blank(){
-var qnv = qn.value,
-qsv = qs.value,
-oav = oa.value,
-obv = ob.value,
-ocv = oc.value,
-odv = od.value;
-main.value = 'Some fields are empty';}
+function blank(){main.value = 'Some fields are empty';}
 
 function pasteall() {
 var qnv = qn.value,
@@ -78,9 +94,10 @@ else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {update();}
+var q = qn.value;
+gen.innerHTML =  'Saved';
+setTimeout(function(){gen.innerHTML = 'Save Q.'+q;},1000);
 
-gen.innerHTML = 'Completed';
-setTimeout(function(){gen.innerHTML = 'Generate';},1000);
 }
 
 
@@ -91,47 +108,63 @@ setTimeout(function(){gen.innerHTML = 'Generate';},1000);
 <script>
 
 
-function qp(){l.removeItem('3qp'); pasteall();}
+function qp(){l.removeItem('aqp'); pasteall();}
 
-function clearall(){l.removeItem('3q'); qp(); location.reload();}
-function clearqn(){l.removeItem('3qn'); qn.value='';qp();}
-function clearqs(){l.removeItem('3qs'); qs.value='';qp();}
-function clearoa(){l.removeItem('3oa'); oa.value='';qp();}
-function clearob(){l.removeItem('3ob'); ob.value='';qp();}
-function clearoc(){l.removeItem('3oc'); oc.value='';qp();}
-function clearod(){l.removeItem('3od'); od.value='';qp();}
+function clearall(){l.removeItem('aq'); qp(); location.reload();}
+function clearqn(){l.removeItem('aqn'); qn.value='';qp();}
+function clearqs(){l.removeItem('aqs'); qs.value='';qp();}
+function clearoa(){l.removeItem('aoa'); oa.value='';qp();}
+function clearob(){l.removeItem('aob'); ob.value='';qp();}
+function clearoc(){l.removeItem('aoc'); oc.value='';qp();}
+function clearod(){l.removeItem('aod'); od.value='';qp();}
 
 function save(){
-l.setItem('3qp','1'); 
-l.setItem('3q','1'); 
-l.setItem('3qn',qn.value);
-l.setItem('3qs',qs.value); 
-l.setItem('3oa',oa.value); 
-l.setItem('3ob',ob.value); 
-l.setItem('3oc',oc.value); 
-l.setItem('3od',od.value); 
+l.setItem('aqp','1'); 
+l.setItem('aq','1'); 
+l.setItem('aqn',qn.value);
+l.setItem('aqs',qs.value); 
+l.setItem('aoa',oa.value); 
+l.setItem('aob',ob.value); 
+l.setItem('aoc',oc.value); 
+l.setItem('aod',od.value); 
+
+var q = qn.value;
+gen.innerHTML = 'Save Q.'+q;
+
+
 }
-if (l.getItem('3q')) { 
-qn.value = l.getItem('3qn');
-qs.value = l.getItem('3qs');
-qs.value = l.getItem('3qs');
-oa.value = l.getItem('3oa');
-ob.value = l.getItem('3ob');
-oc.value = l.getItem('3oc');
-od.value = l.getItem('3od');
+if (l.getItem('aq')) { 
+qn.value = l.getItem('aqn');
+qs.value = l.getItem('aqs');
+qs.value = l.getItem('aqs');
+oa.value = l.getItem('aoa');
+ob.value = l.getItem('aob');
+oc.value = l.getItem('aoc');
+od.value = l.getItem('aod');
 }
 
 function copyall() {
 
+l.setItem('qn1',main.value); 
+
 main.select();
 main.setSelectionRange(0, 99999);
 document.execCommand('copy');
-message.innerHTML = 'Copied';
-setTimeout(function(){message.innerHTML = 'Copy All';},1000);
+var q = qn.value;
+gen.innerHTML = 'Done';
+setTimeout(function(){gen.innerHTML =  'Generate Q.'+q;},1000);
+}
+
+function repaste() {
+var qn1 = l.getItem('qn1');
+cq.value = qn1;
 }
 
 
-$(document).ready(function() {if (l.getItem('3qp')) { pasteall()} ;});
+$(document).ready(function() {if (l.getItem('aqp')) { pasteall()} ;});
 </script>
+
+
+
 
 
