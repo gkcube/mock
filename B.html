@@ -180,6 +180,14 @@ cq.value = q1+q2+q3+q4;
 
 
 $(document).ready(function() {   autopaste();   });
+
+function share() {
+var c = '';
+if (navigator.share) {
+navigator.share({ 
+text: cq.value,
+
+}) }}
 </script>
 
 
