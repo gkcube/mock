@@ -111,39 +111,39 @@ else {update();}
 <script>
 
 
-function qp(){l.removeItem('bqp'); getvalue();}
+function qp(){l.removeItem('dqp'); getvalue();}
 
-function clearall(){l.removeItem('bq'); qp(); location.reload();}
-function clearqn(){l.removeItem('bqn'); qn.value='';qp();}
-function clearqs(){l.removeItem('bqs'); qs.value='';qp();}
-function clearoa(){l.removeItem('boa'); oa.value='';qp();}
-function clearob(){l.removeItem('bob'); ob.value='';qp();}
-function clearoc(){l.removeItem('boc'); oc.value='';qp();}
-function clearod(){l.removeItem('bod'); od.value='';qp();}
+function clearall(){l.removeItem('dq'); qp(); location.reload();}
+function clearqn(){l.removeItem('dqn'); qn.value='';qp();}
+function clearqs(){l.removeItem('dqs'); qs.value='';qp();}
+function clearoa(){l.removeItem('doa'); oa.value='';qp();}
+function clearob(){l.removeItem('dob'); ob.value='';qp();}
+function clearoc(){l.removeItem('doc'); oc.value='';qp();}
+function clearod(){l.removeItem('dod'); od.value='';qp();}
 
 function save(){
-l.setItem('bqp','1'); 
-l.setItem('bq','1'); 
-l.setItem('bqn',qn.value);
-l.setItem('bqs',qs.value); 
-l.setItem('boa',oa.value); 
-l.setItem('bob',ob.value); 
-l.setItem('boc',oc.value); 
-l.setItem('bod',od.value); 
+l.setItem('dqp','1'); 
+l.setItem('dq','1'); 
+l.setItem('dqn',qn.value);
+l.setItem('dqs',qs.value); 
+l.setItem('doa',oa.value); 
+l.setItem('dob',ob.value); 
+l.setItem('doc',oc.value); 
+l.setItem('dod',od.value); 
 
 var q = qn.value;
 gen.innerHTML = 'Save Q.'+q;
 
 
 }
-if (l.getItem('bq')) { 
-qn.value = l.getItem('bqn');
-qs.value = l.getItem('bqs');
-qs.value = l.getItem('bqs');
-oa.value = l.getItem('boa');
-ob.value = l.getItem('bob');
-oc.value = l.getItem('boc');
-od.value = l.getItem('bod');
+if (l.getItem('dq')) { 
+qn.value = l.getItem('dqn');
+qs.value = l.getItem('dqs');
+qs.value = l.getItem('dqs');
+oa.value = l.getItem('doa');
+ob.value = l.getItem('dob');
+oc.value = l.getItem('doc');
+od.value = l.getItem('dod');
 }
 
 function copyall() {
@@ -169,7 +169,7 @@ cq.value = qn1+qn2;
 }
 
 
-$(document).ready(function() {if (l.getItem('bqp')) { getvalue()}     repaste();   ;});
+$(document).ready(function() {if (l.getItem('dqp')) { getvalue()}     repaste();   ;});
 </script>
 
 
