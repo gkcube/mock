@@ -27,7 +27,7 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 
 
 <button onclick='getvalue()'><gen>Create</gen></button>
-<button onclick='repaste();notice();'><paste>-</paste></button>
+<button onclick='repaste();'><paste>-</paste></button>
 <button onclick='clearall()'>Clear Options</button>
 
 <hr/>
@@ -157,17 +157,42 @@ paste.innerHTML = ' Save Q.'+q+' Below';
 }
 
 function repaste() {
-var qn1 = l.getItem('qn1'),
-qn2=l.getItem('qn2');
+
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value,
+qn1='',qn2='';
+
+if(l.getItem('qn1')){qn1=l.getItem('qn1')}
+if(l.getItem('qn2')){qn2=l.getItem('qn2')}
+
+if (qnv =='') { blank();}
+else if  (qsv =='') {blank();}
+else if  (oav =='') {blank();}
+else if  (obv =='') {blank();}
+else if  (ocv =='') {blank();}
+else if  (odv =='') {blank();}
+else {
+
+
+
 
 cq.value = qn1+qn2;
+paste.innerHTML = ' Q.'+qn.value+' Saved';
+
+}
+
+
+
+
 
 
 }
 
-function notice(){var q = qn.value;
 
-paste.innerHTML = ' Q.'+q+' Saved';}
 
 
 
