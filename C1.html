@@ -1,0 +1,173 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<style>
+
+input {width:calc(100% - 100px); height:30px;}
+.cq {width:50%}
+
+textarea{width:calc(100% - 100px); height:30px; margin-bottom:-6px}
+#main {height:100px; width:100%}
+qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
+
+</style>
+
+<h2>OPTION C is Correct</h2>
+<button onclick="location.replace('A1.html')">A</button>
+<button onclick="location.replace('B1.html')">B</button>
+<button style='background-color:yellow;'>C</button>
+<button onclick="location.replace('D1.html')">D</button>
+<hr/>
+
+Question No.<br/><input type='number' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
+Question<br/><textarea id='qs' oninput='save();' ></textarea><button onclick='clearqs()'>CLEAR</button><br/>
+Option A<br/><textarea id='oa' oninput='save();' ></textarea><button onclick='clearoa()'>CLEAR</button><br/>
+Option B<br/><textarea id='ob' oninput='save();' ></textarea><button onclick='clearob()'>CLEAR</button><br/>
+Option C (Correct)<br/><textarea id='oc' oninput='save();' ></textarea><button onclick='clearoc()'>CLEAR</button><br/>
+Option D<br/><textarea id='od' oninput='save();' ></textarea><button onclick='clearod()'>CLEAR</button><br/>
+
+<button onclick='getvalue()'><gen>Create</gen></button>
+<button onclick='clearall()'>Clear Options</button>
+
+<hr/>
+Code is saved in the below box <button onclick='clearbox()'>Clear Box</button>
+<textarea id='main' readonly></textarea>
+
+<hr/>
+
+<button onclick='share()'>Share This Code</button>
+
+
+
+
+<script>
+var l = localStorage,
+paste = document.querySelector('paste'),
+gen = document.querySelector('gen'),
+qn = document.getElementById('qn'),
+qs = document.getElementById('qs'),
+oa = document.getElementById('oa'),
+ob = document.getElementById('ob'),
+oc = document.getElementById('oc'),
+od = document.getElementById('od'),
+main = document.getElementById('main'),
+q1='',
+
+cq = document.getElementById('cq'),
+p1 = "<div class='swiper-slide'><div class='mqbox q",
+p2 = "'><button class='mquestion'><srl>Q.",
+p3 = "</srl> ",
+p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
+p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
+p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
+p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
+p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
+p9 = "</button></opt></div></div>"
+
+
+function update(){
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;
+
+
+var q = qn.value;
+gen.innerHTML =  'Q.'+q+' Saved & Copied';
+setTimeout(function(){gen.innerHTML = 'Q.'+q+' Save & Copy Again';},2000);}
+
+
+
+function blank(){gen.innerHTML = 'Please fill all options'; }
+
+function getvalue() {
+var qnv = qn.value,
+qsv = qs.value,
+oav = oa.value,
+obv = ob.value,
+ocv = oc.value,
+odv = od.value;
+
+if (qnv =='') { blank();}
+else if  (qsv =='') {blank();}
+else if  (oav =='') {blank();}
+else if  (obv =='') {blank();}
+else if  (ocv =='') {blank();}
+else if  (odv =='') {blank();}
+else {update(); copyall();}}
+
+function clearall(){l.removeItem('aq'); location.reload();}
+function clearqn(){l.removeItem('aqn'); qn.value='';}
+function clearqs(){l.removeItem('aqs'); qs.value='';}
+function clearoa(){l.removeItem('aoa'); oa.value='';}
+function clearob(){l.removeItem('aob'); ob.value='';}
+function clearoc(){l.removeItem('aoc'); oc.value='';}
+function clearod(){l.removeItem('aod'); od.value='';}
+
+function clearbox(){
+l.removeItem('single');
+
+main.value='';}
+
+function save(){
+l.setItem('aq','1'); 
+l.setItem('aqn',qn.value);
+l.setItem('aqs',qs.value); 
+l.setItem('aoa',oa.value); 
+l.setItem('aob',ob.value); 
+l.setItem('aoc',oc.value); 
+l.setItem('aod',od.value); 
+
+var q = qn.value;
+if(q!=''){gen.innerHTML = 'Create Q.'+q;}else{gen.innerHTML = 'Create'}
+
+}
+if (l.getItem('aq')) { 
+qn.value = l.getItem('aqn');
+qs.value = l.getItem('aqs');
+qs.value = l.getItem('aqs');
+oa.value = l.getItem('aoa');
+ob.value = l.getItem('aob');
+oc.value = l.getItem('aoc');
+od.value = l.getItem('aod');
+}
+
+function copyall() {
+l.setItem('single',main.value); 
+
+main.select();
+main.setSelectionRange(0, 99999);
+document.execCommand('copy');
+}
+
+
+
+
+function autopaste(){
+
+if(l.getItem('single')){q1=l.getItem('single')}
+main.value = q1;
+
+var q = qn.value;
+gen.innerHTML =  'Create Q.'+q;
+}
+
+
+$(document).ready(function() {   autopaste();   });
+
+function share() {
+var c = '';
+if (navigator.share) {
+navigator.share({ 
+text: main.value,
+
+}) }}
+</script>
+
+<link rel="prefetch" href="A1.html" />
+<link rel="prefetch" href="B1.html" />
+<link rel="prefetch" href="C1.html" />
+<link rel="prefetch" href="D1.html" />
