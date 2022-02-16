@@ -2,24 +2,30 @@
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <style>
-
+button{border-width:1px;}
 input {width:calc(100% - 100px); height:30px;}
-.cq {width:50%}
+#cq,#main {position: absolute;clip: rect(0 0 0 0);}
+.r {background-color:#00CA62; }
+.now {background-color:#00CA62; }
+textarea{width:calc(100% - 100px); height:30px; margin-bottom:-6px}
 
-textarea {width:100%;height:200px;}
-#main {height:100px;}
 qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
+opt,c {display:none}
+.optn {width:calc(100% - 30px); text-align:left;}
+.o {width:30px; text-align:left;}
+o0 .o {background-color:#00CA62;}
+.mquestion {width:100%; background-color:white; text-align:left;}
 </style>
 
-<h2>OPTION D is Correct</h2>
-<button onclick="location.replace('A.html')">A</button>
+<b>15 Questions Set | Option D will be correct</b><br/>
+<button onclick="location.replace('A.html')" >A</button>
 <button onclick="location.replace('B.html')">B</button>
 <button onclick="location.replace('C.html')">C</button>
-<button style='background-color:yellow;' onclick="location.replace('D.html')">D</button>
+<button class='now'>D</button>
 <hr/>
 
-Question No.<br/><input type='text' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
-Question<br/><input type='text' id='qs'  oninput='save();'/><button onclick='clearqs()'>CLEAR</button><br/>
+Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
+Question<br/><textarea id='qs' oninput='save();' ></textarea><button onclick='clearqs()'>CLEAR</button><br/>
 Option A<br/><input type='text' id='oa' oninput='save();' /><button onclick='clearoa()'>CLEAR</button><br/>
 Option B<br/><input type='text' id='ob' oninput='save();'/><button onclick='clearob()'>CLEAR</button><br/>
 Option C<br/><input type='text' id='oc' oninput='save();'/><button onclick='clearoc()'>CLEAR</button><br/>
@@ -27,18 +33,20 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 
 
 <button onclick='getvalue()'><gen>Create</gen></button>
-<button onclick='ownpaste();'><paste>-</paste></button>
+<button onclick='sharesingle();'><paste>-</paste></button>
 <button onclick='clearall()'>Clear Options</button>
 
 <hr/>
-<textarea hidden id='main' readonly></textarea>
+<textarea id='main' readonly></textarea>
 
 
-All questions are saved in the below box <button onclick='clearbox()'>Clear box for new set</button><hr/>
+Questions (Green Numbers) are saved now <br/>
+<qb style="display:none">0</qb><qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb><qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb><qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb><hr/>
+<button onclick='share()'>Share All Saved Questions</button><button style='float:right' onclick='clearbox()'>Delete Full Code</button>
 <textarea id='cq' readonly></textarea>
-<button onclick='share()'>Share This Code</button>
 
 
+<div id='preview'></div>
 
 
 <script>
@@ -52,7 +60,8 @@ ob = document.getElementById('ob'),
 oc = document.getElementById('oc'),
 od = document.getElementById('od'),
 main = document.getElementById('main'),
-q1='',q2='',q3='',q4='',
+preview = document.getElementById('preview'),
+q1='',q2='',q3='',q4='',q5='',q6='',q7='',q8='',q9='',q10='',q11='',q12='',q13='',q14='',q15='',
 
 cq = document.getElementById('cq'),
 p1 = "<div class='swiper-slide'><div class='mqbox q",
@@ -63,7 +72,7 @@ p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
 p6 = "</button></o2><o3><button class='o 3'>C</button><button class='optn'>",
 p7 = "</button></o3><o0><button class='o 0'>D</button><button class='optn'>",
 p8 = "</button></o0><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>D</button><button class='optn'>",
-p9 = "</button></opt></div></div>"
+p9 = "</button></opt></div></div>\r\n\r\n"
 
 
 function update(){
@@ -77,7 +86,8 @@ main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+odv+p9;
 
 
 var q = qn.value;
-gen.innerHTML =  'Q.'+q+' Created';
+gen.innerHTML =  'Q.'+q+' Saved & Copied';
+setTimeout(function(){gen.innerHTML = 'Q.'+q+' Save & Copy Again';},2000);
 
 }
 
@@ -97,22 +107,20 @@ else if  (oav =='') {blank();}
 else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
-else {update(); copyall();}}
+else {update(); copyall(); ownpaste();}}
 
 function clearall(){l.removeItem('aq'); location.reload();}
-function clearqn(){l.removeItem('aqn'); qn.value='';}
-function clearqs(){l.removeItem('aqs'); qs.value='';}
-function clearoa(){l.removeItem('aoa'); oa.value='';}
-function clearob(){l.removeItem('aob'); ob.value='';}
-function clearoc(){l.removeItem('aoc'); oc.value='';}
-function clearod(){l.removeItem('aod'); od.value='';}
+function clearqn(){l.removeItem('aqn'); qn.value='';qn.focus();}
+function clearqs(){l.removeItem('aqs'); qs.value='';qs.focus();}
+function clearoa(){l.removeItem('aoa'); oa.value='';oa.focus();}
+function clearob(){l.removeItem('aob'); ob.value='';ob.focus();}
+function clearoc(){l.removeItem('aoc'); oc.value='';oc.focus();}
+function clearod(){l.removeItem('aod'); od.value='';od.focus();}
 
 function clearbox(){
-l.removeItem('q1');
-l.removeItem('q2');
-l.removeItem('q3');
-l.removeItem('q4');
-cq.value='';}
+
+var remove = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15']; 
+  for (key of remove) {l.removeItem(key);} location.reload();}
 
 function save(){
 l.setItem('aq','1'); 
@@ -143,13 +151,24 @@ if(qn.value==q){l.setItem('q'+q,main.value); }
 main.select();
 main.setSelectionRange(0, 99999);
 document.execCommand('copy');
-paste.innerHTML = ' Save Q.'+q+' Below';}
+paste.innerHTML = ' Share Q.'+q+' Only';}
 
 function getpaste(){
-if(l.getItem('q1')){q1=l.getItem('q1')}
-if(l.getItem('q2')){q2=l.getItem('q2')}
-if(l.getItem('q3')){q3=l.getItem('q3')}
-if(l.getItem('q4')){q4=l.getItem('q4')}
+if(l.getItem('q1')){q1=l.getItem('q1'); $('qb:eq(1)').addClass('r');}
+if(l.getItem('q2')){q2=l.getItem('q2');$('qb:eq(2)').addClass('r');}
+if(l.getItem('q3')){q3=l.getItem('q3');$('qb:eq(3)').addClass('r');}
+if(l.getItem('q4')){q4=l.getItem('q4');$('qb:eq(4)').addClass('r');}
+if(l.getItem('q5')){q5=l.getItem('q5'); $('qb:eq(5)').addClass('r');}
+if(l.getItem('q6')){q6=l.getItem('q6');$('qb:eq(6)').addClass('r');}
+if(l.getItem('q7')){q7=l.getItem('q7');$('qb:eq(7)').addClass('r');}
+if(l.getItem('q8')){q8=l.getItem('q8');$('qb:eq(8)').addClass('r');}
+if(l.getItem('q9')){q9=l.getItem('q9'); $('qb:eq(9)').addClass('r');}
+if(l.getItem('q10')){q10=l.getItem('q10');$('qb:eq(10)').addClass('r');}
+if(l.getItem('q11')){q11=l.getItem('q11');$('qb:eq(11)').addClass('r');}
+if(l.getItem('q12')){q12=l.getItem('q12');$('qb:eq(12)').addClass('r');}
+if(l.getItem('q13')){q13=l.getItem('q13'); $('qb:eq(13)').addClass('r');}
+if(l.getItem('q14')){q14=l.getItem('q14');$('qb:eq(14)').addClass('r');}
+if(l.getItem('q15')){q15=l.getItem('q15');$('qb:eq(15)').addClass('r');}
 
 }
 
@@ -169,14 +188,19 @@ else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {
-cq.value = q1+q2+q3+q4;
-paste.innerHTML = ' Q.'+q+' Saved';}}
+cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+preview.innerHTML = q1+'<br/>'+q2+'<br/>'+q3+'<br/>'+q4+'<br/>'+q5+'<br/>'+q6+'<br/>'+q7+'<br/>'+q8+'<br/>'+q9+'<br/>'+q10+'<br/>'+q11+'<br/>'+q12+'<br/>'+q13+'<br/>'+q14+'<br/>'+q15+'<br/>';
+}}
 
 
 function autopaste(){
 
 getpaste();
-cq.value = q1+q2+q3+q4;
+cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+
+preview.innerHTML = q1+'<br/>'+q2+'<br/>'+q3+'<br/>'+q4+'<br/>'+q5+'<br/>'+q6+'<br/>'+q7+'<br/>'+q8+'<br/>'+q9+'<br/>'+q10+'<br/>'+q11+'<br/>'+q12+'<br/>'+q13+'<br/>'+q14+'<br/>'+q15+'<br/>';
+var q = qn.value;
+gen.innerHTML =  'Create Q.'+q;
 }
 
 
@@ -187,6 +211,14 @@ var c = '';
 if (navigator.share) {
 navigator.share({ 
 text: cq.value,
+
+}) }}
+
+function sharesingle() {
+var c = '';
+if (navigator.share) {
+navigator.share({ 
+text: main.value,
 
 }) }}
 </script>

@@ -8,7 +8,6 @@ input {width:calc(100% - 100px); height:30px;}
 
 textarea{width:calc(100% - 100px); height:30px; margin-bottom:-6px}
 #main {height:100px; width:100%}
-qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
 
 </style>
 
@@ -19,7 +18,9 @@ qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:
 <button onclick="location.replace('D1.html')">D</button>
 <hr/>
 
-Question No.<br/><input type='number' id='qn'  oninput='save();'/><button onclick='clearqn()'>CLEAR</button><br/>
+Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();' /><button onclick='clearqn()'>CLEAR</button><br/>
+
+
 Question<br/><textarea id='qs' oninput='save();' ></textarea><button onclick='clearqs()'>CLEAR</button><br/>
 Option A (Correct)<br/><textarea id='oa' oninput='save();' ></textarea><button onclick='clearoa()'>CLEAR</button><br/>
 Option B<br/><textarea id='ob' oninput='save();' ></textarea><button onclick='clearob()'>CLEAR</button><br/>
@@ -63,7 +64,7 @@ p5 = "</button></o0><o1><button class='o 1'>B</button><button class='optn'>",
 p6 = "</button></o1><o2><button class='o 2'>C</button><button class='optn'>",
 p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>A</button><button class='optn'>",
-p9 = "</button></opt></div></div>"
+p9 = "</button></opt></div></div>\r\n\r\n"
 
 
 function update(){
@@ -114,6 +115,8 @@ l.removeItem('single');
 main.value='';}
 
 function save(){
+
+
 l.setItem('aq','1'); 
 l.setItem('aqn',qn.value);
 l.setItem('aqs',qs.value); 
