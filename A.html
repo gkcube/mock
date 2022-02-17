@@ -9,13 +9,14 @@ input {width:calc(100% - 100px); height:30px;}
 .now {background-color:#00CA62; }
 textarea{width:calc(100% - 100px); height:30px; margin-bottom:-6px}
 
-qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
+qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block; user-select:none;}
 opt,c {display:none}
 .optn {width:calc(100% - 30px); text-align:left;}
 .o {width:30px; text-align:left;}
 o0 .o {background-color:#00CA62;}
 .mquestion {width:100%; background-color:white; text-align:left;}
-.swiper-slide {margin-top:3px}
+.swiper-slide {margin-top:10px}
+.edit{float:right;margin-bottom:10px}
 </style>
 
 <b>15 Questions Set | Option A will be correct</b><br/>
@@ -36,13 +37,13 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 <button onclick='getvalue()'><gen>Create</gen></button>
 <button onclick='sharesingle();'><paste>-</paste></button>
 <button onclick='clearall()'>Clear Options</button>
-
+<button onclick='qe1()'>Q1</button>
 <hr/>
 <textarea id='main' readonly></textarea>
 
 
 Questions (Green Numbers) are saved now <br/>
-<qb style="display:none">0</qb><qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb><qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb><qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb><hr/>
+<qb style="display:none">0</qb><qb onclick='qe1();'>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb><qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb><qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb><hr/>
 <button onclick='share()'>Share All Saved Questions</button><button style='float:right' onclick='clearbox()'>Delete Full Code</button>
 <textarea id='cq' readonly></textarea>
 
@@ -67,13 +68,14 @@ q1='',q2='',q3='',q4='',q5='',q6='',q7='',q8='',q9='',q10='',q11='',q12='',q13='
 cq = document.getElementById('cq'),
 p1 = "<div class='swiper-slide'><div class='mqbox q",
 p2 = "'><button class='mquestion'><srl>Q.",
-p3 = "</srl> ",
-p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o0><button class='o 0'>A</button><button class='optn'>",
+p3 = "</srl> <qs>",
+p4 = "</qs></button><opt><button class='ca'>আপনার উত্তর</button></opt><o0><button class='o 0'>A</button><button class='optn'>",
 p5 = "</button></o0><o1><button class='o 1'>B</button><button class='optn'>",
 p6 = "</button></o1><o2><button class='o 2'>C</button><button class='optn'>",
 p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>A</button><button class='optn'>",
-p9 = "</button></opt></div></div>\r\n\r\n"
+p9 = "</button></opt></div></div>\r\n\r\n",
+e1 = "<button class='edit' onclick='qe1();'>Edit Q.1</button>";
 
 
 function update(){
@@ -190,7 +192,7 @@ else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {
 cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
-preview.innerHTML = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+prev();
 }}
 
 
@@ -198,11 +200,12 @@ function autopaste(){
 
 getpaste();
 cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
-
-preview.innerHTML = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+prev();
 var q = qn.value;
 gen.innerHTML =  'Create Q.'+q;
 }
+
+function prev() {preview.innerHTML = q1+e1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;}
 
 
 $(document).ready(function() {   autopaste();   });
@@ -222,6 +225,28 @@ navigator.share({
 text: main.value,
 
 }) }}
+
+
+function qe1() {
+qn.value='1'; qs.focus();
+if(l.getItem('q1')){
+qs.value=$('.q1 qs').html(); 
+oa.value = $('.q1 .optn:eq(0)').html(); 
+ob.value = $('.q1 .optn:eq(1)').html(); 
+oc.value = $('.q1 .optn:eq(2)').html(); 
+od.value = $('.q1 .optn:eq(3)').html(); 
+save();}}
+
+function qe2() {
+qn.value='1'; qs.focus();
+if(l.getItem('q2')){
+qs.value=$('.q2 qs').html(); 
+oa.value = $('.q2 .optn:eq(0)').html(); 
+ob.value = $('.q2 .optn:eq(1)').html(); 
+oc.value = $('.q2 .optn:eq(2)').html(); 
+od.value = $('.q2 .optn:eq(3)').html(); 
+save();}}
+
 </script>
 
 <link rel="prefetch" href="A.html" />
