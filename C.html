@@ -2,20 +2,22 @@
 
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <style>
-button{border-width:1px;}
+body{max-width:100%; user-select:none;}
+button{border-width:1px;user-select:none;}
 input {width:calc(100% - 100px); height:30px;}
-#cq,#main {position: absolute;clip: rect(0 0 0 0);}
+#cq,#main,#single {position: absolute;clip: rect(0 0 0 0);}
 .r {background-color:#00CA62; }
 .now {background-color:#00CA62; }
 textarea{width:calc(100% - 100px); height:30px; margin-bottom:-6px}
 
-qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block}
+qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 0px 0px; padding:0px; line-height:20px; display:inline-block; user-select:none;}
 opt,c {display:none}
-.optn {width:calc(100% - 30px); text-align:left;}
-.o {width:30px; text-align:left;}
+.optn {width:calc(100% - 30px); text-align:left; pointer-events:none;}
+.o {width:30px; text-align:left; pointer-events:none;}
 o0 .o {background-color:#00CA62;}
 .mquestion {width:100%; background-color:white; text-align:left;}
-  .swiper-slide {margin-top:3px}
+.swiper-slide {margin-top:10px}
+.edit{float:right;margin-bottom:10px}
 </style>
 
 <b>15 Questions Set | Option C will be correct</b><br/>
@@ -34,15 +36,29 @@ Option D<br/><input type='text' id='od' oninput='save();'/><button onclick='clea
 
 
 <button onclick='getvalue()'><gen>Create</gen></button>
-<button onclick='sharesingle();'><paste>-</paste></button>
 <button onclick='clearall()'>Clear Options</button>
-
 <hr/>
 <textarea id='main' readonly></textarea>
+<textarea id='single' readonly></textarea>
 
 
 Questions (Green Numbers) are saved now <br/>
-<qb style="display:none">0</qb><qb>1</qb><qb>2</qb><qb>3</qb><qb>4</qb><qb>5</qb><qb>6</qb><qb>7</qb><qb>8</qb><qb>9</qb><qb>10</qb><qb>11</qb><qb>12</qb><qb>13</qb><qb>14</qb><qb>15</qb><hr/>
+<qb style="display:none">0</qb>
+<qb onclick='qe1();'>1</qb>
+<qb onclick='qe2();'>2</qb>
+<qb onclick='qe3();'>3</qb>
+<qb onclick='qe4();'>4</qb>
+<qb onclick='qe5();'>5</qb>
+<qb onclick='qe6();'>6</qb>
+<qb onclick='qe7();'>7</qb>
+<qb onclick='qe8();'>8</qb>
+<qb onclick='qe9();'>9</qb>
+<qb onclick='qe10();'>10</qb>
+<qb onclick='qe11();'>11</qb>
+<qb onclick='qe12();'>12</qb>
+<qb onclick='qe13();'>13</qb>
+<qb onclick='qe14();'>14</qb>
+<qb onclick='qe15();'>15</qb><hr/>
 <button onclick='share()'>Share All Saved Questions</button><button style='float:right' onclick='clearbox()'>Delete Full Code</button>
 <textarea id='cq' readonly></textarea>
 
@@ -61,19 +77,22 @@ ob = document.getElementById('ob'),
 oc = document.getElementById('oc'),
 od = document.getElementById('od'),
 main = document.getElementById('main'),
+single = document.getElementById('single'),
+edit = document.getElementsByClassName('single'),
 preview = document.getElementById('preview'),
 q1='',q2='',q3='',q4='',q5='',q6='',q7='',q8='',q9='',q10='',q11='',q12='',q13='',q14='',q15='',
 
 cq = document.getElementById('cq'),
 p1 = "<div class='swiper-slide'><div class='mqbox q",
 p2 = "'><button class='mquestion'><srl>Q.",
-p3 = "</srl> ",
-p4 = "</button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
+p3 = "</srl> <qs>",
+p4 = "</qs></button><opt><button class='ca'>আপনার উত্তর</button></opt><o1><button class='o 1'>A</button><button class='optn'>",
 p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
 p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
 p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
-p9 = "</button></opt></div></div>\r\n\r\n"
+p9 = "</button></opt></div></div>\r\n\r\n",
+e1='',e2='',e3='',e4='',e5='',e6='',e7='',e7='',e8='',e9='',e10='',e11='',e12='',e13='',e14='',e15='';
 
 
 function update(){
@@ -133,7 +152,7 @@ l.setItem('aoc',oc.value);
 l.setItem('aod',od.value); 
 
 var q = qn.value;
-if(q!=''){gen.innerHTML = 'Create Q.'+q;}else{gen.innerHTML = 'Create'}
+if(q!=''){gen.innerHTML = 'Create Q.'+q+' & Save';}else{gen.innerHTML = 'Create'}
 
 }
 if (l.getItem('aq')) { 
@@ -152,7 +171,7 @@ if(qn.value==q){l.setItem('q'+q,main.value); }
 main.select();
 main.setSelectionRange(0, 99999);
 document.execCommand('copy');
-paste.innerHTML = ' Share Q.'+q+' Only';}
+paste.innerHTML = ' Copy Q.'+q+' Only';}
 
 function getpaste(){
 if(l.getItem('q1')){q1=l.getItem('q1'); $('qb:eq(1)').addClass('r');}
@@ -190,7 +209,7 @@ else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {
 cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
-preview.innerHTML = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+prev();
 }}
 
 
@@ -198,30 +217,209 @@ function autopaste(){
 
 getpaste();
 cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
-
-preview.innerHTML = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
+prev();
 var q = qn.value;
-gen.innerHTML =  'Create Q.'+q;
+gen.innerHTML =  'Create Q.'+q+' & Save';
 }
+
+function prev() {
+
+if(l.getItem('q1')){e1 = "<button class='edit' onclick='qe1();'>Edit Q.1</button><button class='edit' onclick='sq1(this);'>Copy Q.1</button>"}
+if(l.getItem('q2')){e2 = "<button class='edit' onclick='qe2();'>Edit Q.2</button><button class='edit' onclick='sq2(this);'>Copy Q.2</button>"}
+if(l.getItem('q3')){e3 = "<button class='edit' onclick='qe3();'>Edit Q.3</button><button class='edit' onclick='sq3(this);'>Copy Q.3</button>"}
+if(l.getItem('q4')){e4 = "<button class='edit' onclick='qe4();'>Edit Q.4</button><button class='edit' onclick='sq4(this);'>Copy Q.4</button>"}
+if(l.getItem('q5')){e5 = "<button class='edit' onclick='qe5();'>Edit Q.5</button><button class='edit' onclick='sq5(this);'>Copy Q.5</button>"}
+if(l.getItem('q6')){e6 = "<button class='edit' onclick='qe6();'>Edit Q.6</button><button class='edit' onclick='sq6(this);'>Copy Q.6</button>"}
+if(l.getItem('q7')){e7 = "<button class='edit' onclick='qe7();'>Edit Q.7</button><button class='edit' onclick='sq7(this);'>Copy Q.7</button>"}
+if(l.getItem('q8')){e8 = "<button class='edit' onclick='qe8();'>Edit Q.8</button><button class='edit' onclick='sq8(this);'>Copy Q.8</button>"}
+if(l.getItem('q9')){e9 = "<button class='edit' onclick='qe9();'>Edit Q.9</button><button class='edit' onclick='sq9(this);'>Copy Q.9</button>"}
+if(l.getItem('q10')){e10 = "<button class='edit' onclick='qe10();'>Edit Q.10</button><button class='edit' onclick='sq10(this);'>Copy Q.10</button>"}
+if(l.getItem('q11')){e11 = "<button class='edit' onclick='qe11();'>Edit Q.11</button><button class='edit' onclick='sq11(this);'>Copy Q.11</button>"}
+if(l.getItem('q12')){e12 = "<button class='edit' onclick='qe12();'>Edit Q.12</button><button class='edit' onclick='sq12(this);'>Copy Q.12</button>"}
+if(l.getItem('q13')){e13 = "<button class='edit' onclick='qe13();'>Edit Q.13</button><button class='edit' onclick='sq13(this);'>Copy Q.13</button>"}
+if(l.getItem('q14')){e14 = "<button class='edit' onclick='qe14();'>Edit Q.14</button><button class='edit' onclick='sq14(this);'>Copy Q.14</button>"}
+if(l.getItem('q15')){e15 = "<button class='edit' onclick='qe15();'>Edit Q.15</button><button class='edit' onclick='sq15(this);'>Copy Q.15</button>";}
+
+preview.innerHTML = q1+e1+q2+e2+q3+e3+q4+e4+q5+e5+q6+e6+q7+e7+q8+e8+q9+e9+q10+e10+q11+e11+q12+e12+q13+e13+q14+e14+q15+e15;}
+
+
 
 
 $(document).ready(function() {   autopaste();   });
 
 function share() {
-var c = '';
-if (navigator.share) {
-navigator.share({ 
-text: cq.value,
+var c = '';if (navigator.share) {navigator.share({ text: cq.value,}) }}
+function sharesingle() {var c = '';if (navigator.share) {navigator.share({ text: main.value,}) }}
 
-}) }}
 
-function sharesingle() {
-var c = '';
-if (navigator.share) {
-navigator.share({ 
-text: main.value,
+function qe1() {
+qn.value='1'; qs.focus();
+if(l.getItem('q1')){
+qs.value=$('.q1 qs').html(); oa.value = $('.q1 .optn:eq(0)').html(); ob.value = $('.q1 .optn:eq(1)').html(); 
+oc.value = $('.q1 .optn:eq(2)').html(); od.value = $('.q1 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
 
-}) }}
+function qe2() {
+qn.value='2'; qs.focus();
+if(l.getItem('q2')){qs.value=$('.q2 qs').html(); oa.value = $('.q2 .optn:eq(0)').html(); 
+ob.value = $('.q2 .optn:eq(1)').html(); oc.value = $('.q2 .optn:eq(2)').html(); od.value = $('.q2 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe3() {
+qn.value='3'; qs.focus();
+if(l.getItem('q3')){qs.value=$('.q3 qs').html(); oa.value = $('.q3 .optn:eq(0)').html(); 
+ob.value = $('.q3 .optn:eq(1)').html(); oc.value = $('.q3 .optn:eq(2)').html(); od.value = $('.q3 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe4() {
+qn.value='4'; qs.focus();
+if(l.getItem('q4')){qs.value=$('.q4 qs').html(); oa.value = $('.q4 .optn:eq(0)').html(); 
+ob.value = $('.q4 .optn:eq(1)').html(); oc.value = $('.q4 .optn:eq(2)').html(); od.value = $('.q4 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe5() {
+qn.value='5'; qs.focus();
+if(l.getItem('q5')){
+qs.value=$('.q5 qs').html(); 
+oa.value = $('.q5 .optn:eq(0)').html(); 
+ob.value = $('.q5 .optn:eq(1)').html(); 
+oc.value = $('.q5 .optn:eq(2)').html(); 
+od.value = $('.q5 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe6() {
+qn.value='6'; qs.focus();
+if(l.getItem('q6')){
+qs.value=$('.q6 qs').html(); 
+oa.value = $('.q6 .optn:eq(0)').html(); 
+ob.value = $('.q6 .optn:eq(1)').html(); 
+oc.value = $('.q6 .optn:eq(2)').html(); 
+od.value = $('.q6 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe7() {
+qn.value='7'; qs.focus();
+if(l.getItem('q7')){
+qs.value=$('.q7 qs').html(); 
+oa.value = $('.q7 .optn:eq(0)').html(); 
+ob.value = $('.q7 .optn:eq(1)').html(); 
+oc.value = $('.q7 .optn:eq(2)').html(); 
+od.value = $('.q7 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe8() {
+qn.value='8'; qs.focus();
+if(l.getItem('q8')){
+qs.value=$('.q8 qs').html(); 
+oa.value = $('.q8 .optn:eq(0)').html(); 
+ob.value = $('.q8 .optn:eq(1)').html(); 
+oc.value = $('.q8 .optn:eq(2)').html(); 
+od.value = $('.q8 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe9() {
+qn.value='9'; qs.focus();
+if(l.getItem('q9')){
+qs.value=$('.q9 qs').html(); 
+oa.value = $('.q9 .optn:eq(0)').html(); 
+ob.value = $('.q9 .optn:eq(1)').html(); 
+oc.value = $('.q9 .optn:eq(2)').html(); 
+od.value = $('.q9 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe10() {
+qn.value='10'; qs.focus();
+if(l.getItem('q10')){
+qs.value=$('.q10 qs').html(); 
+oa.value = $('.q10 .optn:eq(0)').html(); 
+ob.value = $('.q10 .optn:eq(1)').html(); 
+oc.value = $('.q10 .optn:eq(2)').html(); 
+od.value = $('.q10 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe11() {
+qn.value='11'; qs.focus();
+if(l.getItem('q11')){
+qs.value=$('.q11 qs').html(); 
+oa.value = $('.q11 .optn:eq(0)').html(); 
+ob.value = $('.q11 .optn:eq(1)').html(); 
+oc.value = $('.q11 .optn:eq(2)').html(); 
+od.value = $('.q11 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe12() {
+qn.value='12'; qs.focus();
+if(l.getItem('q12')){
+qs.value=$('.q12 qs').html(); 
+oa.value = $('.q12 .optn:eq(0)').html(); 
+ob.value = $('.q12 .optn:eq(1)').html(); 
+oc.value = $('.q12 .optn:eq(2)').html(); 
+od.value = $('.q12 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe13() {
+qn.value='13'; qs.focus();
+if(l.getItem('q13')){
+qs.value=$('.q13 qs').html(); 
+oa.value = $('.q13 .optn:eq(0)').html(); 
+ob.value = $('.q13 .optn:eq(1)').html(); 
+oc.value = $('.q13 .optn:eq(2)').html(); 
+od.value = $('.q13 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe14() {
+qn.value='14'; qs.focus();
+if(l.getItem('q14')){
+qs.value=$('.q14 qs').html(); 
+oa.value = $('.q14 .optn:eq(0)').html(); 
+ob.value = $('.q14 .optn:eq(1)').html(); 
+oc.value = $('.q14 .optn:eq(2)').html(); 
+od.value = $('.q14 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+function qe15() {
+qn.value='15'; qs.focus();
+if(l.getItem('q15')){
+qs.value=$('.q15 qs').html(); 
+oa.value = $('.q15 .optn:eq(0)').html(); 
+ob.value = $('.q15 .optn:eq(1)').html(); 
+oc.value = $('.q15 .optn:eq(2)').html(); 
+od.value = $('.q15 .optn:eq(3)').html(); 
+} else{qs.value='';oa.value='';ob.value='';oc.value='';od.value='';}save();}
+
+function sq1(c){single.value=q1;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.1';},1000);}
+function sq2(c){single.value=q2;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.2';},1000);}
+function sq3(c){single.value=q3;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.3';},1000);}
+function sq4(c){single.value=q4;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.4';},1000);}
+function sq5(c){single.value=q5;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.5';},1000);}
+function sq6(c){single.value=q6;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.6';},1000);}
+function sq7(c){single.value=q7;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.7';},1000);}
+function sq8(c){single.value=q8;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.8';},1000);}
+function sq9(c){single.value=q9;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.9';},1000);}
+function sq10(c){single.value=q10;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.10';},1000);}
+function sq11(c){single.value=q11;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.11';},1000);}
+function sq12(c){single.value=q12;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.12';},1000);}
+function sq13(c){single.value=q13;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.13';},1000);}
+function sq14(c){single.value=q14;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.14';},1000);}
+function sq15(c){single.value=q15;
+single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.15';},1000);}
+
 </script>
 
 <link rel="prefetch" href="A.html" />
