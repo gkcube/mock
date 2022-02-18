@@ -17,9 +17,10 @@ opt,c {display:none}
 .o {width:30px; text-align:left; pointer-events:none;}
 o0 .o {background-color:#00CA62;}
 .mquestion {width:100%; background-color:white; text-align:left;}
-.swiper-slide {margin-top:10px}
+.swiper-slide {margin-top:2px}
 .edit{float:right;margin-bottom:10px}
 buttonholder{width:100%;display:block}
+.action {height:25px;}
 </style>
 
 <b>15 Questions Set | Option D will be correct</b><br/>
@@ -28,23 +29,6 @@ buttonholder{width:100%;display:block}
 <button onclick="location.replace('C.html')">C</button>
 <button class='now'>D</button>
 <hr/>
-
-Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>CLEAR</button><br/>
-Question<br/><textarea id='qs' oninput='save();' ></textarea><button class='cl' onclick='clearqs()'>CLEAR</button><br/>
-Option A<br/><input type='text' id='oa' oninput='save();' /><button class='cl' onclick='clearoa()'>CLEAR</button><br/>
-Option B<br/><input type='text' id='ob' oninput='save();'/><button class='cl' onclick='clearob()'>CLEAR</button><br/>
-Option C<br/><input type='text' id='oc' oninput='save();'/><button class='cl' onclick='clearoc()'>CLEAR</button><br/>
-Option D<br/><input type='text' id='od' oninput='save();'/><button class='cl' onclick='clearod()'>CLEAR</button><br/>
-
-
-<button onclick='getvalue()'><gen>Create</gen></button>
-<button onclick='clearall()'>Clear Options</button>
-<hr/>
-<textarea id='main' readonly></textarea>
-<textarea id='single' readonly></textarea>
-
-
-Questions (Green Numbers) are saved now <br/>
 <qb style="display:none">0</qb>
 <qb onclick='qe1();'>1</qb>
 <qb onclick='qe2();'>2</qb>
@@ -60,13 +44,32 @@ Questions (Green Numbers) are saved now <br/>
 <qb onclick='qe12();'>12</qb>
 <qb onclick='qe13();'>13</qb>
 <qb onclick='qe14();'>14</qb>
-<qb onclick='qe15();'>15</qb><hr/>
+<qb onclick='qe15();'>15</qb>
+<br/>
+<b>Questions in Green are saved now</b>
+<hr/>
+
+
+Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>CLEAR</button><br/>
+Question<br/><textarea id='qs' oninput='save();' ></textarea><button class='cl' onclick='clearqs()'>CLEAR</button><br/>
+Option A<br/><input type='text' id='oa' oninput='save();' /><button class='cl' onclick='clearoa()'>CLEAR</button><br/>
+Option B<br/><input type='text' id='ob' oninput='save();'/><button class='cl' onclick='clearob()'>CLEAR</button><br/>
+Option C<br/><input type='text' id='oc' oninput='save();'/><button class='cl' onclick='clearoc()'>CLEAR</button><br/>
+Option D<br/><input type='text' id='od' oninput='save();'/><button class='cl' onclick='clearod()'>CLEAR</button><br/>
+
+
+<button class='action' onclick='getvalue()'><gen>Create</gen></button>
+<button class='action' onclick='clearall()'>Clear Options</button>
+<hr/>
+<textarea id='main' readonly></textarea>
+<textarea id='single' readonly></textarea>
+
 <buttonholder>
-<button button onclick='share()'>Share All Saved Questions</button><button style='float:right;' onclick='clearbox()'>Delete Full Code</button>
+<button class='action' button onclick='share(this)'>Copy Full Code</button><button class='action' style='float:right;' onclick='clearbox()'>Delete Full Code</button>
 </buttonholder>
 <textarea id='cq' readonly></textarea>
 
-
+<b>Questions Preview Below</b><br/>
 <div id='preview'></div>
 
 
@@ -250,9 +253,9 @@ preview.innerHTML = q1+e1+q2+e2+q3+e3+q4+e4+q5+e5+q6+e6+q7+e7+q8+e8+q9+e9+q10+e1
 
 $(document).ready(function() {   autopaste();   });
 
-function share() {
-var c = '';if (navigator.share) {navigator.share({ text: cq.value,}) }}
-function sharesingle() {var c = '';if (navigator.share) {navigator.share({ text: main.value,}) }}
+function share(c) {
+cq.select(); cq.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Full Code';},1000);}
 
 
 function qe1() {
