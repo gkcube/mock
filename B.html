@@ -256,9 +256,9 @@ preview.innerHTML = q1+e1+q2+e2+q3+e3+q4+e4+q5+e5+q6+e6+q7+e7+q8+e8+q9+e9+q10+e1
 
 $(document).ready(function() {   autopaste();   });
 
-function share() {
-var c = '';if (navigator.share) {navigator.share({ text: cq.value,}) }}
-function sharesingle() {var c = '';if (navigator.share) {navigator.share({ text: main.value,}) }}
+function share(c) {
+cq.select(); cq.setSelectionRange(0, 99999); document.execCommand('copy');
+c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Full Code';},1000);}
 
 
 function qe1() {
