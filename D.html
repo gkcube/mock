@@ -4,13 +4,14 @@
 <style>
 body{max-width:100%; user-select:none; }
 button{border-width:1px;user-select:none;}
-.cl {width:60px; height:30px;}
-input {width:calc(100% - 60px); height:30px;}
+.cl {width:24px; height:30px;}
+input {width:calc(100% - 52px); height:30px;}
 #qn {width:50px}
 #cq,#main,#single {position: absolute;clip: rect(0 0 0 0);}
 .r {background-color:#00CA62; }
-.now {background-color:#00CA62; }
-textarea{width:calc(100% - 60px); height:35px; margin-bottom:-13px}
+.now {background-color:#00CA62; margin-right:0px; height:30px; width:24px;}
+.abc {margin-right:0px;height:30px; width:24px;}
+textarea{width:calc(100% - 24px); height:35px; margin-bottom:-13px}
 
 qb {text-align:center; font-size: 15px; width:25px;border:1px solid #000;height:20px;margin:0px 2px 2px 0px; padding:0px; line-height:20px; display:inline-block; user-select:none;}
 opt,c {display:none}
@@ -24,12 +25,6 @@ buttonholder{width:100%;display:block}
 .action {height:25px;}
 </style>
 
-<b>15 Questions Set | Option D will be correct</b><br/>
-<button onclick="location.replace('A.html')" >A</button>
-<button onclick="location.replace('B.html')">B</button>
-<button onclick="location.replace('C.html')">C</button>
-<button class='now'>D</button>
-<hr/>
 <qb style="display:none">0</qb>
 <qb onclick='qe1();'>1</qb>
 <qb onclick='qe2();'>2</qb>
@@ -46,17 +41,19 @@ buttonholder{width:100%;display:block}
 <qb onclick='qe13();'>13</qb>
 <qb onclick='qe14();'>14</qb>
 <qb onclick='qe15();'>15</qb>
-<br/>
-<b>Questions in Green are saved now</b>
 <hr/>
 
 
-Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>CLEAR</button><br/>
-Question<br/><textarea id='qs' oninput='save();' ></textarea><button class='cl' style='height:35px' onclick='clearqs()'>CLEAR</button><br/>
-Option A<br/><input type='text' id='oa' oninput='save();' /><button class='cl' onclick='clearoa()'>CLEAR</button><br/>
-Option B<br/><input type='text' id='ob' oninput='save();'/><button class='cl' onclick='clearob()'>CLEAR</button><br/>
-Option C<br/><input type='text' id='oc' oninput='save();'/><button class='cl' onclick='clearoc()'>CLEAR</button><br/>
-Option D<br/><input type='text' id='od' oninput='save();'/><button class='cl' onclick='clearod()'>CLEAR</button><br/>
+Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>X</button><br/>
+Question<br/><textarea id='qs' oninput='save();' ></textarea><button class='cl' style='height:35px' onclick='clearqs()'>X</button><br/>
+<button class='abc' onclick="location.replace('A.html')">A</button>
+<input type='text' id='oa' oninput='save();' /><button class='cl' onclick='clearoa()'>X</button><br/>
+<button class='abc' onclick="location.replace('B.html')">B</button>
+<input type='text' id='ob' oninput='save();'/><button class='cl' onclick='clearob()'>X</button><br/>
+<button class='abc' onclick="location.replace('C.html')">C</button>
+<input type='text' id='oc' oninput='save();'/><button class='cl' onclick='clearoc()'>X</button><br/>
+<button class='now'>D</button>
+<input type='text' id='od' oninput='save();'/><button class='cl' onclick='clearod()'>X</button><br/>
 
 
 <button class='action' onclick='getvalue()'><gen>Save</gen></button>
