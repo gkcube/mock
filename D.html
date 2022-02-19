@@ -221,7 +221,7 @@ getpaste();
 cq.value = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15;
 prev();
 var q = qn.value;
-gen.innerHTML =  'Create Q.'+q+' & Save';
+gen.innerHTML =  'Save Q.'+q;
 }
 
 function prev() {
@@ -244,10 +244,6 @@ if(l.getItem('q15')){e15 = "<button class='edit' onclick='qe15();'>Edit Q.15</bu
 
 preview.innerHTML = q1+e1+q2+e2+q3+e3+q4+e4+q5+e5+q6+e6+q7+e7+q8+e8+q9+e9+q10+e10+q11+e11+q12+e12+q13+e13+q14+e14+q15+e15;}
 
-
-
-
-$(document).ready(function() {   autopaste();   });
 
 function share(c) {
 cq.select(); cq.setSelectionRange(0, 99999); document.execCommand('copy');
@@ -422,6 +418,7 @@ function sq15(c){single.value=q15;
 single.select(); single.setSelectionRange(0, 99999); document.execCommand('copy');
 c.innerHTML = 'Copied'; setTimeout(function(){c.innerHTML = 'Copy Q.15';},1000);}
 
+$(document).ready(function() {   autopaste();   });
 </script>
 
 <link rel="prefetch" href="A.html" />
