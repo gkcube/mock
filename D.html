@@ -150,24 +150,17 @@ var remove = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q1
 
 function save(){
 l.setItem('aq','1'); 
-l.setItem('aqn',qn.value);
-l.setItem('aqs',qs.value); 
-l.setItem('aoa',oa.value); 
-l.setItem('aob',ob.value); 
-l.setItem('aoc',oc.value); 
-l.setItem('aod',od.value); 
+l.setItem('aqn',qn.value);l.setItem('aqs',qs.value); 
+l.setItem('aoa',oa.value); l.setItem('aob',ob.value); 
+l.setItem('aoc',oc.value); l.setItem('aod',od.value); 
 
 var q = qn.value;
-if(q!=''){gen.innerHTML = 'Save Q.'+q;}else{gen.innerHTML = 'Save'}
+if(q!=''){gen.innerHTML = 'Save Q.'+q;}else{gen.innerHTML = 'Save'}}
 
-}
 if (l.getItem('aq')) { 
-qn.value = l.getItem('aqn');
-qs.value = l.getItem('aqs');
-qs.value = l.getItem('aqs');
-oa.value = l.getItem('aoa');
-ob.value = l.getItem('aob');
-oc.value = l.getItem('aoc');
+qn.value = l.getItem('aqn');qs.value = l.getItem('aqs');
+qs.value = l.getItem('aqs');oa.value = l.getItem('aoa');
+ob.value = l.getItem('aob');oc.value = l.getItem('aoc');
 od.value = l.getItem('aod');
 }
 
