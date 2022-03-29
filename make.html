@@ -230,6 +230,7 @@ if(qn.value==q){l.setItem('q'+q,main.value); }
 }
 
 function getpaste(){
+if(l.getItem('v')==null){vara(); $('.va').addClass('r');}
 if(l.getItem('v')=='a'){vara(); $('.va').addClass('r');}
 if(l.getItem('v')=='b'){varb(); $('.vb').addClass('r');}
 if(l.getItem('v')=='c'){varc(); $('.vc').addClass('r');}
