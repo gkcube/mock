@@ -90,7 +90,7 @@ q1='',q2='',q3='',q4='',q5='',q6='',q7='',q8='',q9='',q10='',q11='',q12='',q13='
 
 cq = document.getElementById('cq'),
 
-p1,p2,p3,p4,p5,p6,p7,p8,p9,
+p1,p2,p3,p4,p5,p6,p7,p8,p9,co,cv,
 e1='',e2='',e3='',e4='',e5='',e6='',e7='',e7='',e8='',e9='',e10='',e11='',e12='',e13='',e14='',e15='';
 
 function vara() {
@@ -102,8 +102,10 @@ p5 = "</button></o0><o1><button class='o 1'>B</button><button class='optn'>",
 p6 = "</button></o1><o2><button class='o 2'>C</button><button class='optn'>",
 p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn half'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>A</button><button class='optn'>",
-p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n";
+p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n",
+co='a',qq=qn.value;
 l.setItem('v','a');
+gen.innerHTML =  'Save Q.'+qq;
 $('.abc').removeClass('r'); $('.va').addClass('r');
 document.title = 'A-MOCK';
 }
@@ -117,8 +119,10 @@ p5 = "</button></o1><o0><button class='o 0'>B</button><button class='optn'>",
 p6 = "</button></o0><o2><button class='o 2'>C</button><button class='optn'>",
 p7 = "</button></o2><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn half'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>B</button><button class='optn'>",
-p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n";
-l.setItem('v','b'); 
+p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n",
+co='b',qq=qn.value;
+l.setItem('v','b');
+gen.innerHTML =  'Save Q.'+qq;
 $('.abc').removeClass('r'); $('.vb').addClass('r');
 document.title = 'B-MOCK';
 }
@@ -132,8 +136,10 @@ p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
 p6 = "</button></o2><o0><button class='o 0'>C</button><button class='optn'>",
 p7 = "</button></o0><o3><button class='o 3'>D</button><button class='optn'>",
 p8 = "</button></o3><c><button class='o'>X</button><button class='optn half'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>C</button><button class='optn'>",
-p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n";
+p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n",
+co='c',qq=qn.value;
 l.setItem('v','c');
+gen.innerHTML =  'Save Q.'+qq;
 $('.abc').removeClass('r'); $('.vc').addClass('r');
 document.title = 'C-MOCK';
 }
@@ -147,8 +153,10 @@ p5 = "</button></o1><o2><button class='o 2'>B</button><button class='optn'>",
 p6 = "</button></o2><o3><button class='o 3'>C</button><button class='optn'>",
 p7 = "</button></o3><o0><button class='o 0'>D</button><button class='optn'>",
 p8 = "</button></o0><c><button class='o'>X</button><button class='optn half'>Clear Answer</button></c><opt><button class='ca'>সঠিক উত্তর</button><button class='o 0'>D</button><button class='optn'>",
-p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n";
+p9 = "</button></opt><o4><button class='o 4'>M</button><button class='optn half'>Mark For Review</button></o4></div></div>\r\n\r\n",
+co='d',qq=qn.value;
 l.setItem('v','d'); 
+gen.innerHTML =  'Save Q.'+qq;
 $('.abc').removeClass('r'); $('.vd').addClass('r');
 document.title = 'D-MOCK';
 }
@@ -164,15 +172,18 @@ oav = oa.value,
 obv = ob.value,
 ocv = oc.value,
 odv = od.value;
-main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+ocv+p9;
-
-
-var q = qn.value;
-gen.innerHTML =  'Q.'+q+' Saved';
+if(co=='a'){cv=oa.value;}
+if(co=='b'){cv=ob.value;}
+if(co=='c'){cv=oc.value;}
+if(co=='d'){cv=od.value;}
+main.value = p1+qnv+p2+qnv+p3+qsv+p4+oav+p5+obv+p6+ocv+p7+odv+p8+cv+p9;
 
 }
 
 function blank(){gen.innerHTML = 'Please fill all options'; }
+function salert(){var q=qn.value;gen.innerHTML =  'Q.'+q+' Saved';}
+
+
 
 function getvalue() {
 var qnv = qn.value,
@@ -188,7 +199,7 @@ else if  (oav =='') {blank();}
 else if  (obv =='') {blank();}
 else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
-else {update(); copyall(); ownpaste();}}
+else {update(); copyall(); ownpaste();salert()}}
 
 function clearall(){l.removeItem('aq'); location.reload();}
 function clearqn(){l.removeItem('aqn'); qn.value='';qn.focus();}
