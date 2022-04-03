@@ -144,7 +144,7 @@ function ss(){l.setItem(v,o);}
   
 function autoscroll() {var y = $(".mqbox").offset().top; $('html, body').animate({scrollTop: y-65},0); }
 function autovisit() {  var num = $(".swiper-slide-active num").html();
-                       if(l.getItem(ve)==null) {v=q+'v'+num;o=1; ss();$('qb:eq('+num+')').addClass('visit'); lnt();}
+                       if(l.getItem(q+'qe')==null) {v=q+'v'+num;o=1; ss();$('qb:eq('+num+')').addClass('visit'); lnt();}
                       }  
 
 function submit() {l.removeItem(vs); l.setItem(ve, '1');autosubmit();}
