@@ -44,7 +44,7 @@ buttonholder{width:100%;display:block}
 <hr/>
 
 
-Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>X</button> (App Version:1.0.0)<br/>
+Question No.<br/><input type='number'  pattern='[0-9]+' id='qn'  oninput='save();'/><button class='cl' onclick='clearqn()'>X</button> (App Version:1.0.1)<br/>
 Question<br/><textarea id='qs' oninput='save();' ></textarea><button class='cl' style='height:35px' onclick='clearqs()'>X</button><br/>
 <button class='abc va' onclick="vara()">A</button>
 <input type='text' id='oa' oninput='save();' /><button class='cl' onclick='clearoa()'>X</button><br/>
@@ -201,7 +201,7 @@ else if  (ocv =='') {blank();}
 else if  (odv =='') {blank();}
 else {update(); copyall(); ownpaste();salert()}}
 
-function clearall(){l.removeItem('aq'); location.reload();}
+function clearall(){if (confirm("Clear Options?") == true) {l.removeItem('aq'); location.reload();} else {}}
 function clearqn(){l.removeItem('aqn'); qn.value='';qn.focus();}
 function clearqs(){l.removeItem('aqs'); qs.value='';qs.focus();}
 function clearoa(){l.removeItem('aoa'); oa.value='';oa.focus();}
@@ -211,8 +211,10 @@ function clearod(){l.removeItem('aod'); od.value='';od.focus();}
 
 function clearbox(){
 
-var remove = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15']; 
-  for (key of remove) {l.removeItem(key);} location.reload();}
+
+if (confirm("Delete Full Code?") == true) {
+    var remove = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15']; 
+  for (key of remove) {l.removeItem(key);} location.reload();} else {}}
 
 function save(){
 l.setItem('aq','1'); 
