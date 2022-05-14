@@ -107,7 +107,7 @@ padding-right: 2px;   width:calc(100% - 0px); min-height:70px;border-width:0px; 
 border-top-width: 0px; border-color:#595E99; border-style: solid; line-height:23px; margin: 0px 0px 7px 0px;}
 .mquestion srl {margin-left:0px;color:white;background-color:#008BC8;border:none;border-radius: 5px; padding:0px 2px 0px 2px;}
 
-.endpopup {display:none; height:258px;}
+.endpopup, .resumepopup {display:none; height:258px;}
 .startpopup {display:none; height:258px;}
 .dashboardpop {display:none; height:330px;}
 .submitpopup{display:none; height:258px;}
